@@ -155,6 +155,16 @@ function initialiserFormulaireService() {
     const formulaire = document.getElementById("form-service");
     if (!formulaire) return; // autres pages : pas de formulaire
 
+    // Présélection du service si l'adresse contient ?service=...
+    // (boutons "Demander ce service" de services.html)
+    const liste = formulaire.elements["service"];
+    const demande = new URLSearchParams(window.location.search).get("service");
+    if (demande && Array.from(liste.options).some(function (option) {
+        return option.value === demande;
+    })) {
+        liste.value = demande;
+    }
+
     formulaire.addEventListener("submit", function (evenement) {
         evenement.preventDefault(); // empêche le rechargement de la page
 
@@ -163,7 +173,9 @@ function initialiserFormulaireService() {
 
         const donnees = new FormData(formulaire);
         const nom = donnees.get("nom").trim();
-        const service = donnees.get("service");
+        // Texte affiché de l'option choisie (et non sa clé courte)
+        const service = liste.options[liste.selectedIndex].text.trim();
+        const mode = donnees.get("mode");
         const message = donnees.get("message").trim();
 
         // Message structuré (chaque élément de la liste = une ligne)
@@ -174,6 +186,7 @@ function initialiserFormulaireService() {
             "",
             "• Nom : " + nom,
             "• Service : " + service,
+            "• Mode : " + mode,
             "• Détails : " + message
         ];
 
@@ -228,3 +241,4 @@ async function demarrer() {
 }
 
 demarrer();
+           
