@@ -538,7 +538,7 @@ header.scrolled {
 
 .banniere {
     flex: 0 0 92vw;              /* 92 % de la largeur de l'écran, pas du conteneur */
-    max-width: 500px;            /* évite des bannières trop larges sur grand écran */
+    max-width: 420px;            /* évite des bannières trop larges sur grand écran */
     margin: 0;
 }
 
@@ -887,4 +887,122 @@ footer {
         overflow-y: auto;
     }
 
-   
+    .nav-links.open {
+        display: flex;            /* classe ajoutée/retirée par main.js */
+    }
+
+    .nav-links a {
+        text-align: center;
+        font-size: 1rem;
+        padding: 12px 8px;
+        border-radius: 10px;
+    }
+
+    /* --- Accueil --- */
+    .hero {
+        padding: 30px 18px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero h3 {
+        font-size: 1rem;
+    }
+
+    .intro {
+        font-size: 0.95rem;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .home-skills {
+        padding: 30px 18px;
+    }
+
+    .home-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-services {
+        padding: 30px 18px;
+    }
+
+    .home-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* --- Pages intérieures --- */
+    .page-header {
+        padding: 30px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .content-card {
+        padding: 22px 18px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card {
+        padding: 25px 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 25px 20px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        padding: 25px 20px;
+    }
+
+    /* --- Bannières (page À propos) : plus petites sur téléphone
+           pour ne pas occuper tout l'écran --- */
+    .banniere {
+        flex-basis: 78vw;
+        max-width: 320px;
+    }
+
+    .stat strong {
+        font-size: 2.4rem;
+    }
+
+    /* --- Pied de page --- */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-brand {
+        text-align: center;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+}
