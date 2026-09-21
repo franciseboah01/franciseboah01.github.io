@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- IMPORTANT : GitHub Pages affiche cette page pour N'IMPORTE QUELLE adresse
+         inconnue, même très profonde (ex. /a/b/c). Sans <base href="/">, les
+         chemins relatifs (css/style.css, components/...) se casseraient.
+         Avec cette ligne, tous les chemins partent de la racine du site. -->
+    <base href="/">
+
+    <title>Page introuvable | Francis Eboah</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- EN-TÊTE : injecté par js/main.js (components/header.html) -->
+    <header id="site-header"></header>
+
+    <main>
+
+        <section class="page-header">
+
+            <p class="welcome">ERREUR 404</p>
+
+            <h1>Page introuvable</h1>
+
+            <p>
+                La page que vous cherchez n'existe pas ou a été déplacée.
+            </p>
+
+            <div class="hero-buttons" style="margin-top: 25px;">
+
+                <a href="index.html" class="btn">
+                    Retour à l'accueil
+                </a>
+
+                <a href="contact.html" class="btn btn-secondary">
+                    Me contacter
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- PIED DE PAGE : injecté par js/main.js (components/footer.html) -->
+    <footer id="site-footer"></footer>
+
+</body>
+</html>
 
