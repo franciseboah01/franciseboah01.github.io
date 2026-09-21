@@ -117,6 +117,13 @@
     .contact-card {
         padding: 25px 20px;
     }
+    .home-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-skills {
+        padding: 30px 18px;
+    }
 
 }
 
@@ -457,4 +464,48 @@ footer {
     max-width: 700px;
     margin: 0 auto 25px;
     color: #6b7280;
+}
+
+.home-skills {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.home-skills h2 {
+    color: #111827;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.home-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.home-skill {
+    padding: 20px 10px;
+    background: #f5f7fb;
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+
+.home-skill:hover {
+    transform: translateY(-4px);
+}
+
+.home-skill span {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.home-skill h3 {
+    color: #111827;
+    font-size: 0.95rem;
 }
