@@ -68,6 +68,16 @@
     box-sizing: border-box;
 }
 
+/* Défilement fluide vers les ancres (ex. contact.html#demande) */
+html {
+    scroll-behavior: smooth;
+}
+
+/* L'en-tête étant fixe, on décale les ancres pour qu'il ne cache pas le titre */
+section[id] {
+    scroll-margin-top: 90px;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: var(--fond);
@@ -92,11 +102,24 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
+
+    /* EN-TÊTE FIXE : reste collé en haut de l'écran pendant le défilement */
+    position: sticky;
+    top: 0;
+    z-index: 1000;   /* passe au-dessus du contenu de la page */
+    transition: padding 0.3s, box-shadow 0.3s;
 }
 
-/* Réserve la hauteur pendant le chargement du header par JavaScript
-   -> évite que la page "saute" quand le menu apparaît */
-#site-header {
+/* Classe ajoutée par main.js dès que l'on descend dans la page :
+   en-tête plus compact + ombre pour le détacher du contenu */
+header.scrolled {
+    padding: 10px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Réserve la hauteur UNIQUEMENT tant que le header n'est pas chargé
+   (:empty = aucun contenu) -> évite que la page "saute" au chargement */
+#site-header:empty {
     min-height: 76px;
 }
 
@@ -120,25 +143,37 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 18px;
+    gap: 6px;
 }
 
+/* Chaque lien = une "pilule" arrondie */
 .nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s;
 }
 
+/* Survol : fond blanc translucide */
 .nav-links a:hover {
-    color: var(--bleu-nav-survol);
+    background: rgba(255, 255, 255, 0.18);
 }
 
-/* Lien de la page courante (ajouté automatiquement par main.js) */
+/* Page courante (classe ajoutée automatiquement par main.js) :
+   pilule blanche, texte bleu */
 .nav-links a.active {
-    color: var(--bleu-nav-survol);
-    text-decoration: underline;
-    text-underline-offset: 6px;
+    background: white;
+    color: var(--bleu);
+}
+
+/* Contour visible quand on navigue au clavier (accessibilité) */
+.logo:focus-visible,
+.nav-links a:focus-visible,
+.menu-toggle:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
 }
 
 /* Bouton "hamburger" : caché sur ordinateur, affiché sur téléphone (section 10) */
@@ -248,7 +283,7 @@ header {
     width: 180px;
     height: 180px;
     object-fit: cover;
-    object-position: center 15%;   /* ← ligne ajoutée */
+    object-position: center top;   /* garde le haut du visage dans le cadre */
     border-radius: 50%;
     display: block;
     margin: 0 auto 25px;
@@ -698,8 +733,21 @@ footer {
 @media (max-width: 700px) {
 
     /* --- Navigation : logo + bouton hamburger, menu déroulant --- */
+    header {
+        padding: 12px 16px;       /* en-tête plus fin sur téléphone */
+    }
+
+    header.scrolled {
+        padding: 8px 16px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
     .navbar {
         flex-wrap: wrap;
+        gap: 12px;
     }
 
     .menu-toggle {
@@ -710,8 +758,11 @@ footer {
         display: none;            /* caché tant que le bouton n'est pas touché */
         width: 100%;
         flex-direction: column;
-        align-items: center;
-        gap: 4px;
+        align-items: stretch;
+        gap: 6px;
+        /* Si l'écran est petit, le menu défile au lieu de dépasser */
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
     }
 
     .nav-links.open {
@@ -719,10 +770,10 @@ footer {
     }
 
     .nav-links a {
-        width: 100%;
         text-align: center;
         font-size: 1rem;
-        padding: 10px 8px;
+        padding: 12px 8px;
+        border-radius: 10px;
     }
 
     /* --- Accueil --- */
@@ -821,5 +872,5 @@ footer {
     .footer-links a {
         font-size: 0.9rem;
     }
-  }
-
+   }
+   
