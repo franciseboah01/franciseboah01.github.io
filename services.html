@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Services | Francis Eboah</title>
+    <meta name="description" content="Services de Francis Eboah : bureautique, design, création de sites web et d'applications, formations en informatique.">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- EN-TÊTE : injecté par js/main.js (components/header.html) -->
+    <header id="site-header"></header>
+
+    <main>
+
+        <!-- Bandeau de titre -->
+        <section class="page-header">
+
+            <p class="welcome">MES SERVICES</p>
+
+            <h1>Ce que je peux faire pour vous</h1>
+
+            <p>
+                Bureautique, design, création web et mobile, formations,
+                en ligne ou en présentiel. Choisissez un service et
+                envoyez votre demande.
+            </p>
+
+        </section>
+
+        <!-- Grille des services : 4 catégories.
+             Pour ajouter un service : ajouter une ligne <li> dans la bonne liste.
+             Le bouton envoie vers le formulaire de contact avec la catégorie déjà choisie
+             (?service=... doit correspondre à un "value" du <select> de contact.html). -->
+        <section class="services-grid">
+
+            <!-- 1. Bureautique -->
+            <article class="service-card">
+
+                <div class="service-icon">💼</div>
+
+                <h2>Bureautique</h2>
+
+                <p>
+                    Documents, tableaux et présentations soignés,
+                    prêts à être utilisés.
+                </p>
+
+                <ul class="service-list">
+                    <li>Saisie de documents</li>
+                    <li>CV professionnels</li>
+                    <li>Mise en page Word</li>
+                    <li>Factures Excel</li>
+                    <li>Tableaux de bord Excel</li>
+                    <li>Présentations PowerPoint</li>
+                    <li>Impression / Scan</li>
+                    <li>Conversion PDF / Word</li>
+                </ul>
+
+                <a href="contact.html?service=bureautique#demande" class="btn">
+                    Demander ce service
+                </a>
+
+            </article>
+
+            <!-- 2. Digital & Design -->
+            <article class="service-card">
+
+                <div class="service-icon">🎨</div>
+
+                <h2>Digital &amp; Design</h2>
+
+                <p>
+                    Supports visuels et présence en ligne pour faire
+                    connaître votre activité.
+                </p>
+
+                <ul class="service-list">
+                    <li>Création d'affiches publicitaires</li>
+                    <li>Logos professionnels</li>
+                    <li>Cartes de visite</li>
+                    <li>Gestion de pages Facebook</li>
+                    <li>Community management</li>
+                </ul>
+
+                <a href="contact.html?service=digital#demande" class="btn">
+                    Demander ce service
+                </a>
+
+            </article>
+
+            <!-- 3. Développement web & mobile -->
+            <article class="service-card">
+
+                <div class="service-icon">💻</div>
+
+                <h2>Développement web &amp; mobile</h2>
+
+                <p>
+                    Sites internet, boutiques et applications adaptés
+                    à votre activité.
+                </p>
+
+                <ul class="service-list">
+                    <li>Sites internet vitrine</li>
+                    <li>Boutiques en ligne</li>
+                    <li>Sites d'entreprise</li>
+                    <li>Refonte de site internet</li>
+                    <li>Maintenance de site web</li>
+                    <li>Applications mobiles Android</li>
+                    <li>Applications sur mesure pour entreprises</li>
+                </ul>
+
+                <a href="contact.html?service=web#demande" class="btn">
+                    Demander ce service
+                </a>
+
+            </article>
+
+            <!-- 4. Formations -->
+            <article class="service-card">
+
+                <div class="service-icon">🎓</div>
+
+                <h2>Formations</h2>
+
+                <p>
+                    Des formations pratiques pour apprendre à utiliser
+                    les outils numériques.
+                </p>
+
+                <ul class="service-list">
+                    <li>Formation Word</li>
+                    <li>Formation Excel</li>
+                    <li>Formation PowerPoint</li>
+                    <li>Formation informatique débutant</li>
+                    <li>Formation création de site web</li>
+                </ul>
+
+                <a href="contact.html?service=formation#demande" class="btn">
+                    Demander ce service
+                </a>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- PIED DE PAGE : injecté par js/main.js (components/footer.html) -->
+    <footer id="site-footer"></footer>
+
+</body>
+  </html>
 
