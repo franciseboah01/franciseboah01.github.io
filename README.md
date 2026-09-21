@@ -7,13 +7,15 @@ Site statique publié avec GitHub Pages : https://franciseboah01.github.io
 ```
 franciseboah01.github.io/
 ├── index.html · about.html · skills.html · projects.html · contact.html
+├── 404.html               → page affichée par GitHub Pages pour une adresse inconnue
 ├── css/style.css          → tout le design (variables de couleur en haut)
 ├── js/main.js             → header/footer, menu mobile, formulaire WhatsApp
 ├── components/
 │   ├── header.html        → menu (modifié ici = modifié partout)
 │   └── footer.html        → pied de page (idem)
 └── assets/
-    └── francis-eboah.png  → photo de profil
+    ├── francis-eboah.png  → photo de profil
+    └── favicon.svg        → icône de l'onglet (ajoutée par main.js)
 ```
 
 ## Tester en local
