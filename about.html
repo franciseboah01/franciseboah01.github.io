@@ -88,30 +88,57 @@
                 <span>personnes formées</span>
             </div>
 
+            <!-- Le défilement automatique est fait en CSS pur (@keyframes),
+                 voir .banniere-track dans style.css. Les 3 images sont dupliquées
+                 une fois ci-dessous : c'est ce qui permet à la boucle de repartir
+                 sans "saut" visible (voir le commentaire dans le CSS). -->
             <div class="banniere-defilante">
+                <div class="banniere-track">
 
-                <!-- TODO : personnaliser chaque légende (thème, lieu, date) -->
-                <figure class="banniere">
-                    <img src="assets/formation-1.png"
-                         alt="Remise de certificats aux participants d'une formation"
-                         width="1280" height="720" loading="lazy">
-                    <figcaption>Remise de certificats aux participants</figcaption>
-                </figure>
+                    <!-- TODO : personnaliser chaque légende (thème, lieu, date) -->
+                    <figure class="banniere">
+                        <img src="assets/formation-1.png"
+                             alt="Remise de certificats aux participants d'une formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-                <figure class="banniere">
-                    <img src="assets/formation-2.png"
-                         alt="Participants recevant leur certificat de formation"
-                         width="1280" height="720" loading="lazy">
-                    <figcaption>Remise de certificats aux participants</figcaption>
-                </figure>
+                    <figure class="banniere">
+                        <img src="assets/formation-2.png"
+                             alt="Participants recevant leur certificat de formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-                <figure class="banniere">
-                    <img src="assets/formation-3.png"
-                         alt="Cérémonie de remise de certificats après une formation"
-                         width="1280" height="720" loading="lazy">
-                    <figcaption>Remise de certificats aux participants</figcaption>
-                </figure>
+                    <figure class="banniere">
+                        <img src="assets/formation-3.png"
+                             alt="Cérémonie de remise de certificats après une formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
+                    <!-- Copie des 3 mêmes images, à l'identique (mêmes fichiers,
+                         mêmes légendes) : uniquement pour boucler sans coupure.
+                         Si tu ajoutes/retires une image plus haut, fais pareil ici. -->
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-1.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
+
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-2.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
+
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-3.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
+
+                </div>
             </div>
 
         </section>
