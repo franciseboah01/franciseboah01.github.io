@@ -70,7 +70,7 @@
                      Dans l'ancienne version, "mailto:" était vide :
                      le bouton n'ouvrait aucun destinataire. -->
                 <a
-                    href="mailto: franciseboah01@gmail.com"
+                    href="mailto:VOTRE_EMAIL@exemple.com"
                     class="btn"
                 >
                     Envoyer un email
@@ -85,7 +85,8 @@
                 <h2>Localisation</h2>
 
                 <p>
-                    Côte d'Ivoire
+                    Côte d'Ivoire<br>
+                    Services en ligne ou en présentiel
                 </p>
 
             </div>
@@ -114,13 +115,25 @@
 
                 <div class="form-group">
                     <label for="service">Service souhaité</label>
+                    <!-- "value" = clé courte utilisée dans l'adresse (contact.html?service=web#demande).
+                         Le texte affiché est celui qui part dans le message WhatsApp. -->
                     <select id="service" name="service" required>
                         <option value="">— Choisir un service —</option>
-                        <option>Cours de mathématiques</option>
-                        <option>Formation bureautique / numérique</option>
-                        <option>Création de site web</option>
-                        <option>Analyse de données</option>
-                        <option>Autre demande</option>
+                        <option value="bureautique">Bureautique (documents, CV, Excel, PowerPoint...)</option>
+                        <option value="digital">Digital &amp; Design (affiches, logos, réseaux sociaux)</option>
+                        <option value="web">Développement web &amp; mobile</option>
+                        <option value="formation">Formation</option>
+                        <option value="autre">Autre demande</option>
+                    </select>
+                </div>
+
+                <!-- NOUVEAU : mode de réalisation (lu par main.js grâce à name="mode") -->
+                <div class="form-group">
+                    <label for="mode">Mode souhaité</label>
+                    <select id="mode" name="mode" required>
+                        <option value="">— En ligne ou en présentiel ? —</option>
+                        <option>En ligne</option>
+                        <option>En présentiel</option>
                     </select>
                 </div>
 
