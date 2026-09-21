@@ -502,22 +502,43 @@ header.scrolled {
 }
 
 /* --- Bannières défilantes 16:9 (page À propos) ---
-   Sans JavaScript : défilement horizontal au doigt (ou à la souris),
-   chaque image s'aligne automatiquement (scroll-snap).
-   Chaque bannière fait 92 % de la largeur : on aperçoit un bout de la
-   suivante, ce qui indique qu'il y a d'autres images. */
+   Défilement AUTOMATIQUE, en CSS pur (aucun JavaScript), de la droite
+   vers la gauche, en boucle continue.
+
+   PRINCIPE
+   .banniere-defilante : la "fenêtre" visible (cache le débordement).
+   .banniere-track      : le long ruban de 6 images (3 réelles + 3 copies
+                           identiques dans about.html), qu'on fait glisser
+                           vers la gauche avec @keyframes.
+   Comme les images 4, 5, 6 sont des copies exactes des images 1, 2, 3,
+   au moment où le ruban a glissé de la moitié de sa largeur (-50%),
+   l'image 4 (= copie de la 1) est exactement à la place où était l'image 1
+   au départ : l'animation peut reboucler sans aucun saut visible.
+
+   VITESSE : 3 images x 3 secondes chacune = 9 secondes pour un tour complet
+   (demandé : "défile en 3 s"). Pour changer la vitesse, modifier uniquement
+   la durée ci-dessous (ex. 6s = plus rapide, 15s = plus lent). */
 .banniere-defilante {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+    overflow: hidden;           /* cache tout ce qui dépasse de la fenêtre */
     padding-bottom: 10px;
 }
 
+.banniere-track {
+    display: flex;
+    width: max-content;         /* le ruban prend la largeur de ses 6 images */
+    gap: 15px;
+    animation: defilement-banniere 9s linear infinite;
+}
+
+/* Sur pause au survol / au doigt maintenu : permet de lire une légende */
+.banniere-defilante:hover .banniere-track,
+.banniere-track:active {
+    animation-play-state: paused;
+}
+
 .banniere {
-    flex: 0 0 92%;
-    scroll-snap-align: start;
+    flex: 0 0 92vw;              /* 92 % de la largeur de l'écran, pas du conteneur */
+    max-width: 500px;            /* évite des bannières trop larges sur grand écran */
     margin: 0;
 }
 
@@ -535,6 +556,32 @@ header.scrolled {
     font-size: 0.9rem;
     color: var(--texte-clair);
     text-align: center;
+}
+
+@keyframes defilement-banniere {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* -50% : la moitié du ruban (= les 3 images "réelles"),
+           pas 100% (= le ruban entier, copies comprises) */
+        transform: translateX(-50%);
+    }
+}
+
+/* Confort et accessibilité : si la personne a demandé au système de
+   réduire les animations, on arrête le défilement et on repasse
+   en glissement manuel au doigt / à la souris. */
+@media (prefers-reduced-motion: reduce) {
+    .banniere-track {
+        animation: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    .banniere {
+        scroll-snap-align: start;
+    }
 }
 
 
@@ -840,112 +887,4 @@ footer {
         overflow-y: auto;
     }
 
-    .nav-links.open {
-        display: flex;            /* classe ajoutée/retirée par main.js */
-    }
-
-    .nav-links a {
-        text-align: center;
-        font-size: 1rem;
-        padding: 12px 8px;
-        border-radius: 10px;
-    }
-
-    /* --- Accueil --- */
-    .hero {
-        padding: 30px 18px;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .hero h3 {
-        font-size: 1rem;
-    }
-
-    .intro {
-        font-size: 0.95rem;
-    }
-
-    .profile-photo {
-        width: 150px;
-        height: 150px;
-    }
-
-    .home-skills {
-        padding: 30px 18px;
-    }
-
-    .home-skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .home-services {
-        padding: 30px 18px;
-    }
-
-    .home-services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* --- Pages intérieures --- */
-    .page-header {
-        padding: 30px 18px;
-    }
-
-    .page-header h1 {
-        font-size: 2rem;
-    }
-
-    .content-card {
-        padding: 22px 18px;
-    }
-
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .skill-card {
-        padding: 25px 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .service-card {
-        padding: 25px 20px;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-card {
-        padding: 25px 20px;
-    }
-
-    /* --- Pied de page --- */
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-brand {
-        text-align: center;
-    }
-
-    .footer-links {
-        gap: 10px;
-    }
-
-    .footer-links a {
-        font-size: 0.9rem;
-    }
-   }
    
