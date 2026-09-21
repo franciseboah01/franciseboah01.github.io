@@ -1,1 +1,34 @@
+<!--
+  components/header.html — MENU UNIQUE DU SITE
+  Chargé automatiquement dans <header id="site-header"> par js/main.js.
+  Pour ajouter / renommer une page du menu : modifier UNIQUEMENT ce fichier.
+  (Pense aussi à modifier footer.html, qui a sa propre liste de liens.)
+  Ne mets ici ni <html>, ni <head>, ni <body> : seulement le morceau de menu.
+-->
+<nav class="navbar" aria-label="Navigation principale">
+
+    <a href="index.html" class="logo">
+        Francis Eboah
+    </a>
+
+    <!-- Bouton visible uniquement sur téléphone (voir style.css, section 10) -->
+    <button
+        type="button"
+        class="menu-toggle"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+    >
+        ☰
+    </button>
+
+    <div class="nav-links" id="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À propos</a>
+        <a href="skills.html">Compétences</a>
+        <a href="projects.html">Projets</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+</nav>
 
