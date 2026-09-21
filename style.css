@@ -429,3 +429,12 @@ footer {
 .contact-card .btn {
     margin-top: 5px;
 }
+
+.btn-whatsapp {
+    background: #25d366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background: #1ebe5d;
+}
