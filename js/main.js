@@ -9,7 +9,8 @@
      5. En-tête fixe (ombre + version compacte au défilement)
      6. Année automatique dans le pied de page
      7. Formulaire de service -> message WhatsApp
-     8. Démarrage
+     8. Favicon (icône de l'onglet)
+     9. Démarrage
 
    Chargé dans chaque page avec :  <script src="js/main.js" defer></script>
    ("defer" = le script attend que le HTML soit lu avant de s'exécuter)
@@ -24,7 +25,9 @@ const CONFIG = {
     // Numéro WhatsApp au format international, sans "+" ni espaces
     whatsappNumber: "2250748746140",
     // Dossier des morceaux de page réutilisables
-    componentsPath: "components/"
+    componentsPath: "components/",
+    // Icône affichée dans l'onglet du navigateur
+    faviconPath: "assets/favicon.svg"
 };
 
 
@@ -184,10 +187,26 @@ function initialiserFormulaireService() {
 }
 
 
-/* ---------- 8. DÉMARRAGE ----------
+/* ---------- 8. FAVICON ----------
+   Ajoute l'icône de l'onglet à TOUTES les pages sans toucher à leur HTML.
+   Si une page déclare déjà son icône dans <head>, on ne fait rien. */
+function ajouterFavicon() {
+    if (document.querySelector('link[rel~="icon"]')) return;
+
+    const lien = document.createElement("link");
+    lien.rel = "icon";
+    lien.type = "image/svg+xml";
+    lien.href = CONFIG.faviconPath;
+    document.head.appendChild(lien);
+}
+
+
+/* ---------- 9. DÉMARRAGE ----------
    Ordre important : on charge d'abord header et footer, PUIS on active
    ce qui dépend d'eux (lien actif, menu mobile, année). */
 async function demarrer() {
+    ajouterFavicon(); // immédiat : ne dépend pas du chargement des composants
+
     await Promise.all([
         chargerComposant(
             "site-header",
@@ -209,4 +228,3 @@ async function demarrer() {
 }
 
 demarrer();
-
