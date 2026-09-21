@@ -41,11 +41,41 @@
     .navbar {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
     }
 
     .nav-links {
-        flex-direction: column;
-        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+
+    .hero {
+        padding: 30px 18px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero h3 {
+        font-size: 1rem;
+    }
+
+    .intro {
+        font-size: 0.95rem;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
     }
 
 }
