@@ -5,211 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Francis Eboah | Portfolio professionnel</title>
+    <meta name="description" content="Portfolio de Francis Eboah : professeur de mathématiques, TICE, formateur numérique et développeur web.">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <header>
+    <!-- EN-TÊTE : rempli automatiquement par js/main.js
+         avec le contenu de components/header.html -->
+    <header id="site-header"></header>
 
-    <nav class="navbar">
-
-        <a href="index.html" class="logo">
-            Francis Eboah
-        </a>
-
-        <div class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="about.html">À propos</a>
-            <a href="skills.html">Compétences</a>
-            <a href="projects.html">Projets</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-    </nav>
-
-</header>
-
-    <!-- Contenu principal -->
+    <!-- CONTENU PRINCIPAL (propre à cette page) -->
     <main>
 
+        <!-- Bloc de présentation -->
         <section class="hero">
 
-    <img src="francis-eboah.png"
-         alt="Francis Eboah"
-         class="profile-photo">
+            <img src="assets/francis-eboah.png"
+                 alt="Francis Eboah"
+                 class="profile-photo"
+                 width="180" height="180">
 
-    <p class="welcome">
-        BIENVENUE SUR MON PORTFOLIO
-    </p>
-
-    <h2>Francis Eboah</h2>
-
-    <h3>
-        Professeur de mathématiques • TICE • Formateur numérique • Développeur web
-    </h3>
-
-    <p class="intro">
-        Je m'intéresse à l'enseignement, aux technologies numériques,
-        à l'analyse de données et au développement de solutions web.
-    </p>
-
-    <div class="hero-buttons">
-
-    <a href="about.html" class="btn">
-        Découvrir mon profil
-    </a>
-
-    <a href="contact.html" class="btn btn-secondary">
-        Me contacter
-    </a>
-
-    <a
-        href="https://wa.me/2250748746140"
-        class="btn btn-whatsapp"
-        target="_blank"
-    >
-        WhatsApp
-    </a>
-
-</div>
-
-</section>
-
-<section class="home-about">
-
-    <p class="welcome">MON PARCOURS</p>
-
-    <h2>Enseignement, numérique et innovation</h2>
-
-    <p>
-        Je développe mes compétences à l'intersection de l'enseignement,
-        des technologies numériques, de l'analyse de données et du
-        développement web.
-    </p>
-
-    <a href="about.html" class="btn">
-        En savoir plus
-    </a>
-
-</section>
-
-
-<section class="home-skills">
-
-    <p class="welcome">MES DOMAINES</p>
-
-    <h2>Compétences clés</h2>
-
-    <div class="home-skills-grid">
-
-        <div class="home-skill">
-            <span>📐</span>
-            <h3>Mathématiques</h3>
-        </div>
-
-        <div class="home-skill">
-            <span>💻</span>
-            <h3>Bureautique</h3>
-        </div>
-
-        <div class="home-skill">
-            <span>🌐</span>
-            <h3>Développement web</h3>
-        </div>
-
-        <div class="home-skill">
-            <span>📊</span>
-            <h3>Data</h3>
-        </div>
-
-    </div>
-
-    <a href="skills.html" class="btn">
-        Voir toutes mes compétences
-    </a>
-
-</section>
-
-<section class="home-projects">
-
-    <p class="welcome">MES RÉALISATIONS</p>
-
-    <h2>Quelques projets</h2>
-
-    <div class="home-projects-grid">
-
-        <div class="home-project">
-            <span>🌐</span>
-            <h3>Excellence Digital Center</h3>
-            <p>
-                Formation et services numériques.
+            <p class="welcome">
+                BIENVENUE SUR MON PORTFOLIO
             </p>
-        </div>
 
-        <div class="home-project">
-            <span>💻</span>
-            <h3>Applications web</h3>
-            <p>
-                Conception de solutions web.
+            <h2>Francis Eboah</h2>
+
+            <h3>
+                Professeur de mathématiques • TICE • Formateur numérique • Développeur web
+            </h3>
+
+            <p class="intro">
+                Je m'intéresse à l'enseignement, aux technologies numériques,
+                à l'analyse de données et au développement de solutions web.
             </p>
-        </div>
 
-        <div class="home-project">
-            <span>📊</span>
-            <h3>Analyse de données</h3>
+            <div class="hero-buttons">
+
+                <a href="about.html" class="btn">
+                    Découvrir mon profil
+                </a>
+
+                <a href="contact.html" class="btn btn-secondary">
+                    Me contacter
+                </a>
+
+                <a
+                    href="https://wa.me/2250748746140"
+                    class="btn btn-whatsapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    WhatsApp
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- Aperçu : parcours -->
+        <section class="home-about">
+
+            <p class="welcome">MON PARCOURS</p>
+
+            <h2>Enseignement, numérique et innovation</h2>
+
             <p>
-                Analyse et visualisation de données.
+                Je développe mes compétences à l'intersection de l'enseignement,
+                des technologies numériques, de l'analyse de données et du
+                développement web.
             </p>
-        </div>
 
-    </div>
+            <a href="about.html" class="btn">
+                En savoir plus
+            </a>
 
-    <a href="projects.html" class="btn">
-        Voir tous mes projets
-    </a>
+        </section>
 
-</section>
+        <!-- Aperçu : compétences -->
+        <section class="home-skills">
+
+            <p class="welcome">MES DOMAINES</p>
+
+            <h2>Compétences clés</h2>
+
+            <div class="home-skills-grid">
+
+                <div class="home-skill">
+                    <span>📐</span>
+                    <h3>Mathématiques</h3>
+                </div>
+
+                <div class="home-skill">
+                    <span>💻</span>
+                    <h3>Bureautique</h3>
+                </div>
+
+                <div class="home-skill">
+                    <span>🌐</span>
+                    <h3>Développement web</h3>
+                </div>
+
+                <div class="home-skill">
+                    <span>📊</span>
+                    <h3>Data</h3>
+                </div>
+
+            </div>
+
+            <a href="skills.html" class="btn">
+                Voir toutes mes compétences
+            </a>
+
+        </section>
+
+        <!-- Aperçu : projets -->
+        <section class="home-projects">
+
+            <p class="welcome">MES RÉALISATIONS</p>
+
+            <h2>Quelques projets</h2>
+
+            <div class="home-projects-grid">
+
+                <div class="home-project">
+                    <span>🌐</span>
+                    <h3>Excellence Digital Center</h3>
+                    <p>
+                        Formation et services numériques.
+                    </p>
+                </div>
+
+                <div class="home-project">
+                    <span>💻</span>
+                    <h3>Applications web</h3>
+                    <p>
+                        Conception de solutions web.
+                    </p>
+                </div>
+
+                <div class="home-project">
+                    <span>📊</span>
+                    <h3>Analyse de données</h3>
+                    <p>
+                        Analyse et visualisation de données.
+                    </p>
+                </div>
+
+            </div>
+
+            <a href="projects.html" class="btn">
+                Voir tous mes projets
+            </a>
+
+        </section>
 
     </main>
 
-    <!-- Pied de page -->
-    <footer>
-
-    <div class="footer-content">
-
-        <div class="footer-brand">
-            <h2>Francis Eboah</h2>
-
-            <p>
-                Professeur de mathématiques • TICE •
-                Formateur numérique • Développeur web
-            </p>
-        </div>
-
-        <div class="footer-links">
-
-            <a href="index.html">Accueil</a>
-            <a href="about.html">À propos</a>
-            <a href="skills.html">Compétences</a>
-            <a href="projects.html">Projets</a>
-            <a href="contact.html">Contact</a>
-
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 Francis Eboah — Tous droits réservés.
-        </p>
-
-    </div>
-
-</footer>
+    <!-- PIED DE PAGE : rempli automatiquement par js/main.js
+         avec le contenu de components/footer.html -->
+    <footer id="site-footer"></footer>
 
 </body>
 </html>
