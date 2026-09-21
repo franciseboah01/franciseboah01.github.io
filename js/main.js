@@ -6,9 +6,10 @@
      2. Chargement du header et du footer (components/)
      3. Lien actif dans le menu
      4. Menu mobile (hamburger)
-     5. Année automatique dans le pied de page
-     6. Formulaire de service -> message WhatsApp
-     7. Démarrage
+     5. En-tête fixe (ombre + version compacte au défilement)
+     6. Année automatique dans le pied de page
+     7. Formulaire de service -> message WhatsApp
+     8. Démarrage
 
    Chargé dans chaque page avec :  <script src="js/main.js" defer></script>
    ("defer" = le script attend que le HTML soit lu avant de s'exécuter)
@@ -72,29 +73,76 @@ function marquerLienActif() {
 /* ---------- 4. MENU MOBILE ----------
    Le bouton ☰ ajoute / retire la classe "open" sur la liste des liens.
    Le CSS (style.css, section 10) affiche ou cache le menu selon cette classe.
+   Le menu se referme aussi : au clic sur un lien, au clic en dehors de
+   l'en-tête, avec la touche Échap, et quand on repasse en affichage large.
    ⚠ À appeler APRÈS le chargement du header, sinon le bouton n'existe pas encore. */
 function initialiserMenuMobile() {
+    const entete = document.getElementById("site-header");
     const bouton = document.querySelector(".menu-toggle");
     const liens = document.querySelector(".nav-links");
-    if (!bouton || !liens) return;
+    if (!entete || !bouton || !liens) return;
 
-    bouton.addEventListener("click", function () {
-        const ouvert = liens.classList.toggle("open");
+    // Ouvre (true) ou ferme (false) le menu et synchronise le bouton
+    function definirEtat(ouvert) {
+        liens.classList.toggle("open", ouvert);
         bouton.setAttribute("aria-expanded", String(ouvert));
         bouton.setAttribute("aria-label", ouvert ? "Fermer le menu" : "Ouvrir le menu");
         bouton.textContent = ouvert ? "✕" : "☰";
+    }
+
+    bouton.addEventListener("click", function () {
+        definirEtat(!liens.classList.contains("open"));
+    });
+
+    // Clic sur un lien du menu -> on referme
+    liens.addEventListener("click", function (evenement) {
+        if (evenement.target.closest("a")) definirEtat(false);
+    });
+
+    // Clic ailleurs dans la page -> on referme
+    document.addEventListener("click", function (evenement) {
+        if (!entete.contains(evenement.target)) definirEtat(false);
+    });
+
+    // Touche Échap -> on referme
+    document.addEventListener("keydown", function (evenement) {
+        if (evenement.key === "Escape") definirEtat(false);
+    });
+
+    // Passage en affichage large (rotation du téléphone, PC...) -> on referme
+    window.matchMedia("(min-width: 701px)").addEventListener("change", function () {
+        definirEtat(false);
     });
 }
 
 
-/* ---------- 5. ANNÉE AUTOMATIQUE ---------- */
+/* ---------- 5. EN-TÊTE FIXE ----------
+   Le positionnement fixe est fait en CSS (position: sticky).
+   Ici, on ajoute la classe "scrolled" dès qu'on a défilé de quelques pixels :
+   le CSS en fait une version plus compacte avec une ombre. */
+function initialiserEnteteFixe() {
+    const entete = document.getElementById("site-header");
+    if (!entete) return;
+
+    function mettreAJour() {
+        entete.classList.toggle("scrolled", window.scrollY > 10);
+    }
+
+    // { passive: true } : indique au navigateur que le défilement ne sera pas
+    // bloqué par ce code -> défilement plus fluide sur téléphone
+    window.addEventListener("scroll", mettreAJour, { passive: true });
+    mettreAJour(); // état correct dès le chargement (page rechargée en bas)
+}
+
+
+/* ---------- 6. ANNÉE AUTOMATIQUE ---------- */
 function mettreAJourAnnee() {
     const annee = document.getElementById("annee");
     if (annee) annee.textContent = new Date().getFullYear();
 }
 
 
-/* ---------- 6. FORMULAIRE DE SERVICE -> WHATSAPP ----------
+/* ---------- 7. FORMULAIRE DE SERVICE -> WHATSAPP ----------
    Présent uniquement dans contact.html (id="form-service").
    Au clic sur "Envoyer", on construit un message structuré
    et on ouvre WhatsApp avec ce message déjà écrit.
@@ -136,7 +184,7 @@ function initialiserFormulaireService() {
 }
 
 
-/* ---------- 7. DÉMARRAGE ----------
+/* ---------- 8. DÉMARRAGE ----------
    Ordre important : on charge d'abord header et footer, PUIS on active
    ce qui dépend d'eux (lien actif, menu mobile, année). */
 async function demarrer() {
@@ -155,9 +203,10 @@ async function demarrer() {
 
     marquerLienActif();
     initialiserMenuMobile();
+    initialiserEnteteFixe();
     mettreAJourAnnee();
     initialiserFormulaireService();
 }
 
 demarrer();
-      
+
