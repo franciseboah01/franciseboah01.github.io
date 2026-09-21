@@ -5,34 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Projets | Francis Eboah</title>
+    <meta name="description" content="Projets de Francis Eboah : Excellence Digital Center, applications web, analyse de données et formation numérique.">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
 
-    <header>
-
-        <nav class="navbar">
-
-            <a href="index.html" class="logo">
-                Francis Eboah
-            </a>
-
-            <div class="nav-links">
-                <a href="index.html">Accueil</a>
-                <a href="about.html">À propos</a>
-                <a href="skills.html">Compétences</a>
-                <a href="projects.html">Projets</a>
-                <a href="contact.html">Contact</a>
-            </div>
-
-        </nav>
-
-    </header>
+    <!-- EN-TÊTE : injecté par js/main.js (components/header.html) -->
+    <header id="site-header"></header>
 
     <main>
 
+        <!-- Bandeau de titre -->
         <section class="page-header">
 
             <p class="welcome">MES RÉALISATIONS</p>
@@ -46,6 +32,8 @@
 
         </section>
 
+        <!-- Grille des projets.
+             Pour en ajouter un : copier un bloc <article class="project-card"> -->
         <section class="projects-grid">
 
             <article class="project-card">
@@ -61,7 +49,7 @@
                 </p>
 
                 <span class="project-tag">
-                    Formation & Digital
+                    Formation &amp; Digital
                 </span>
 
             </article>
@@ -121,13 +109,8 @@
 
     </main>
 
-    <footer>
-
-        <p>
-            © 2026 Francis Eboah — Tous droits réservés.
-        </p>
-
-    </footer>
+    <!-- PIED DE PAGE : injecté par js/main.js (components/footer.html) -->
+    <footer id="site-footer"></footer>
 
 </body>
 </html>
