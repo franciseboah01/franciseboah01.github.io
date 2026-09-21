@@ -8,7 +8,7 @@
      4.  Boutons
      5.  Page d'accueil
      6.  Pages intérieures (bandeau + cartes)
-     7.  Compétences / Projets / Contact
+     7.  Compétences / Services / Contact
      8.  Formulaire de service (NOUVEAU)
      9.  Pied de page
      10. Responsive téléphone  ->  TOUJOURS EN DERNIER (voir explication)
@@ -364,8 +364,8 @@ header.scrolled {
     font-size: 0.95rem;
 }
 
-/* --- Section "Quelques projets" --- */
-.home-projects {
+/* --- Section "Mes services" (aperçu) --- */
+.home-services {
     background: white;
     padding: 35px 30px;
     margin-top: 25px;
@@ -374,44 +374,45 @@ header.scrolled {
     box-shadow: var(--ombre-carte);
 }
 
-.home-projects h2 {
+.home-services h2 {
     color: var(--titre);
     font-size: 1.8rem;
     margin-bottom: 25px;
 }
 
-.home-projects-grid {
+.home-services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
     margin-bottom: 25px;
 }
 
-.home-project {
-    padding: 25px 18px;
+.home-service {
+    padding: 25px 12px;
     background: var(--fond);
     border-radius: 12px;
     transition: transform 0.3s;
 }
 
-.home-project:hover {
+.home-service:hover {
     transform: translateY(-4px);
 }
 
-.home-project span {
+.home-service span {
     display: block;
     font-size: 2.2rem;
     margin-bottom: 12px;
 }
 
-.home-project h3 {
+.home-service h3 {
     color: var(--titre);
-    margin-bottom: 8px;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
 }
 
-.home-project p {
+.home-service p {
     color: var(--texte-clair);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 
@@ -484,7 +485,7 @@ header.scrolled {
 
 
 /* ==========================================================================
-   7. COMPÉTENCES / PROJETS / CONTACT
+   7. COMPÉTENCES / SERVICES / CONTACT
    ========================================================================== */
 
 /* --- Compétences --- */
@@ -526,51 +527,71 @@ header.scrolled {
     font-size: 0.95rem;
 }
 
-/* --- Projets --- */
-.projects-grid {
+/* --- Services (page services.html) ---
+   4 cartes (une par catégorie). Chaque carte : icône, titre, phrase,
+   liste de services cochés et bouton "Demander ce service". */
+.services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin-top: 25px;
 }
 
-.project-card {
+.service-card {
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: var(--ombre-carte);
-    border-left: 5px solid var(--bleu);
+    border-top: 4px solid var(--bleu);
+    display: flex;              /* permet d'aligner les boutons en bas des cartes */
+    flex-direction: column;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.project-card:hover {
+.service-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--ombre-survol);
 }
 
-.project-icon {
+.service-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
 }
 
-.project-card h2 {
+.service-card h2 {
     color: var(--titre);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
-.project-card p {
+.service-card > p {
     color: var(--texte-clair);
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
-.project-tag {
-    display: inline-block;
-    background: var(--bleu-pale);
+/* Liste des services : puces remplacées par des ✓ bleus */
+.service-list {
+    list-style: none;
+    margin-bottom: 22px;
+    flex-grow: 1;               /* pousse le bouton vers le bas de la carte */
+}
+
+.service-list li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 8px;
+    color: var(--texte-moyen);
+}
+
+.service-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
     color: var(--bleu);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
     font-weight: bold;
+}
+
+.service-card .btn {
+    align-self: flex-start;
 }
 
 /* --- Contact --- */
@@ -806,12 +827,12 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .home-projects {
+    .home-services {
         padding: 30px 18px;
     }
 
-    .home-projects-grid {
-        grid-template-columns: 1fr;
+    .home-services-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* --- Pages intérieures --- */
@@ -839,11 +860,11 @@ footer {
         padding: 25px 20px;
     }
 
-    .projects-grid {
+    .services-grid {
         grid-template-columns: 1fr;
     }
 
-    .project-card {
+    .service-card {
         padding: 25px 20px;
     }
 
@@ -873,4 +894,4 @@ footer {
         font-size: 0.9rem;
     }
    }
-   
+       
