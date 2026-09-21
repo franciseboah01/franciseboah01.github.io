@@ -1,1 +1,824 @@
+/* ==========================================================================
+   style.css — Feuille de style UNIQUE du portfolio de Francis Eboah
+
+   ORGANISATION
+     1.  Variables (couleurs, ombres)      -> pour changer le thème, modifier ICI
+     2.  Base (reset, body, main)
+     3.  En-tête et navigation
+     4.  Boutons
+     5.  Page d'accueil
+     6.  Pages intérieures (bandeau + cartes)
+     7.  Compétences / Projets / Contact
+     8.  Formulaire de service (NOUVEAU)
+     9.  Pied de page
+     10. Responsive téléphone  ->  TOUJOURS EN DERNIER (voir explication)
+
+   POURQUOI LE RESPONSIVE EST À LA FIN ?
+   En CSS, à spécificité égale, la règle écrite EN DERNIER gagne.
+   Dans l'ancienne version, le bloc @media était au début du fichier : ses
+   règles étaient donc écrasées par les règles de base écrites après lui
+   (les grilles restaient sur plusieurs colonnes sur téléphone).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABLES
+   Utilisation : color: var(--bleu);
+   ========================================================================== */
+:root {
+    /* Couleurs principales */
+    --bleu: #0b5ed7;
+    --bleu-fonce: #084298;        /* survol des boutons */
+    --bleu-pale: #eaf2ff;         /* fond des étiquettes projet */
+    --bleu-nav-survol: #dbeafe;   /* survol du menu (sur fond bleu) */
+    --bleu-pied-survol: #93c5fd;  /* survol des liens du pied de page */
+
+    /* Textes */
+    --texte: #1f2937;
+    --titre: #111827;
+    --texte-moyen: #4b5563;
+    --texte-clair: #6b7280;
+
+    /* Fonds */
+    --fond: #f5f7fb;
+    --blanc: #ffffff;
+    --pied: #111827;
+    --pied-texte: #d1d5db;
+    --pied-bordure: #374151;
+
+    /* WhatsApp */
+    --whatsapp: #25d366;
+    --whatsapp-fonce: #1ebe5d;
+
+    /* Ombres */
+    --ombre-hero: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --ombre-carte: 0 5px 20px rgba(0, 0, 0, 0.06);
+    --ombre-survol: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+
+/* Remise à zéro : supprime les marges par défaut du navigateur */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--fond);
+    color: var(--texte);
+    line-height: 1.6;
+}
+
+/* Conteneur central : toutes les pages y placent leur contenu */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+
+/* ==========================================================================
+   3. EN-TÊTE ET NAVIGATION
+   Le HTML de la navigation est dans components/header.html
+   ========================================================================== */
+header {
+    background: var(--bleu);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Réserve la hauteur pendant le chargement du header par JavaScript
+   -> évite que la page "saute" quand le menu apparaît */
+#site-header {
+    min-height: 76px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--bleu-nav-survol);
+}
+
+/* Lien de la page courante (ajouté automatiquement par main.js) */
+.nav-links a.active {
+    color: var(--bleu-nav-survol);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+/* Bouton "hamburger" : caché sur ordinateur, affiché sur téléphone (section 10) */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   4. BOUTONS
+   ========================================================================== */
+.btn {
+    display: inline-block;
+    background: var(--bleu);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--bleu-fonce);
+}
+
+/* Variante : bouton à contour */
+.btn-secondary {
+    background: transparent;
+    color: var(--bleu);
+    border: 2px solid var(--bleu);
+}
+
+.btn-secondary:hover {
+    background: var(--bleu);
+    color: white;
+}
+
+/* Variante : bouton WhatsApp */
+.btn-whatsapp {
+    background: var(--whatsapp);
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background: var(--whatsapp-fonce);
+}
+
+
+/* ==========================================================================
+   5. PAGE D'ACCUEIL
+   ========================================================================== */
+
+/* Petit texte en majuscules au-dessus des titres */
+.welcome {
+    color: var(--bleu);
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* --- Bloc principal (hero) --- */
+.hero {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-hero);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: var(--titre);
+    margin-bottom: 10px;
+}
+
+.hero h3 {
+    font-size: 1.1rem;
+    color: var(--texte-moyen);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    margin-bottom: 20px;
+}
+
+.intro {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    color: var(--texte-clair);
+    font-size: 1.05rem;
+}
+
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 25px;
+    border: 5px solid var(--bleu);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* --- Section "Mon parcours" --- */
+.home-about {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+}
+
+.home-about h2 {
+    color: var(--titre);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.home-about p:not(.welcome) {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    color: var(--texte-clair);
+}
+
+/* --- Section "Compétences clés" --- */
+.home-skills {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+}
+
+.home-skills h2 {
+    color: var(--titre);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.home-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.home-skill {
+    padding: 20px 10px;
+    background: var(--fond);
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+
+.home-skill:hover {
+    transform: translateY(-4px);
+}
+
+.home-skill span {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.home-skill h3 {
+    color: var(--titre);
+    font-size: 0.95rem;
+}
+
+/* --- Section "Quelques projets" --- */
+.home-projects {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+}
+
+.home-projects h2 {
+    color: var(--titre);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.home-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.home-project {
+    padding: 25px 18px;
+    background: var(--fond);
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+
+.home-project:hover {
+    transform: translateY(-4px);
+}
+
+.home-project span {
+    display: block;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.home-project h3 {
+    color: var(--titre);
+    margin-bottom: 8px;
+}
+
+.home-project p {
+    color: var(--texte-clair);
+    font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   6. PAGES INTÉRIEURES (À propos, Compétences, Projets, Contact)
+   ========================================================================== */
+
+/* Bandeau de titre en haut de chaque page */
+.page-header {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: var(--ombre-hero);
+}
+
+.page-header h1 {
+    font-size: 2.3rem;
+    color: var(--titre);
+    margin-bottom: 10px;
+}
+
+.page-header p:last-child {
+    color: var(--texte-clair);
+}
+
+/* Carte de contenu (page À propos, formulaire...) */
+.content-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: var(--ombre-carte);
+}
+
+.content-card h2 {
+    color: var(--bleu);
+    margin-bottom: 18px;
+}
+
+.content-card p {
+    color: var(--texte-moyen);
+    margin-bottom: 15px;
+}
+
+/* Grille des domaines d'activité (page À propos) */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-item {
+    padding: 20px;
+    background: var(--fond);
+    border-radius: 12px;
+    border-left: 4px solid var(--bleu);
+}
+
+.info-item h3 {
+    color: var(--titre);
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+
+/* ==========================================================================
+   7. COMPÉTENCES / PROJETS / CONTACT
+   ========================================================================== */
+
+/* --- Compétences --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.skill-card {
+    background: white;
+    padding: 28px 22px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+    border-top: 4px solid var(--bleu);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ombre-survol);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.skill-card h2 {
+    color: var(--titre);
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.skill-card p {
+    color: var(--texte-clair);
+    font-size: 0.95rem;
+}
+
+/* --- Projets --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.project-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--ombre-carte);
+    border-left: 5px solid var(--bleu);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ombre-survol);
+}
+
+.project-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.project-card h2 {
+    color: var(--titre);
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    color: var(--texte-clair);
+    margin-bottom: 20px;
+}
+
+.project-tag {
+    display: inline-block;
+    background: var(--bleu-pale);
+    color: var(--bleu);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* --- Contact --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;   /* espace avant le formulaire (ajouté) */
+}
+
+.contact-card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+    border-top: 4px solid var(--bleu);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-card h2 {
+    color: var(--titre);
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: var(--texte-clair);
+    margin-bottom: 20px;
+}
+
+.contact-card .btn {
+    margin-top: 5px;
+}
+
+
+/* ==========================================================================
+   8. FORMULAIRE DE SERVICE (NOUVEAU)
+   Utilisé dans contact.html ; logique dans js/main.js
+   ========================================================================== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--titre);
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--texte);
+    background: var(--fond);
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.form-group textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Contour visible au clavier / au toucher : important pour l'accessibilité */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--bleu);
+    background: white;
+}
+
+.form-note {
+    font-size: 0.9rem;
+    color: var(--texte-clair);
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   9. PIED DE PAGE
+   Le HTML est dans components/footer.html
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    background: var(--pied);
+    color: white;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.footer-brand {
+    text-align: left;
+}
+
+.footer-brand h2 {
+    margin-bottom: 8px;
+}
+
+.footer-brand p {
+    color: var(--pied-texte);
+    max-width: 500px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    color: var(--bleu-pied-survol);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 25px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--pied-bordure);
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+
+/* ==========================================================================
+   10. RESPONSIVE — TÉLÉPHONES (écrans de 700px de large ou moins)
+   ⚠ Ce bloc doit rester LE DERNIER du fichier.
+   Tout nouveau style "téléphone" s'ajoute ici.
+   ========================================================================== */
+@media (max-width: 700px) {
+
+    /* --- Navigation : logo + bouton hamburger, menu déroulant --- */
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;            /* caché tant que le bouton n'est pas touché */
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .nav-links.open {
+        display: flex;            /* classe ajoutée/retirée par main.js */
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        padding: 10px 8px;
+    }
+
+    /* --- Accueil --- */
+    .hero {
+        padding: 30px 18px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero h3 {
+        font-size: 1rem;
+    }
+
+    .intro {
+        font-size: 0.95rem;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .home-skills {
+        padding: 30px 18px;
+    }
+
+    .home-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-projects {
+        padding: 30px 18px;
+    }
+
+    .home-projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* --- Pages intérieures --- */
+    .page-header {
+        padding: 30px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .content-card {
+        padding: 22px 18px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card {
+        padding: 25px 20px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        padding: 25px 20px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        padding: 25px 20px;
+    }
+
+    /* --- Pied de page --- */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-brand {
+        text-align: center;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+  }
 
