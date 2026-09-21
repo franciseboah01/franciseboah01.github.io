@@ -124,6 +124,13 @@
     .home-skills {
         padding: 30px 18px;
     }
+    .home-projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-projects {
+        padding: 30px 18px;
+    }
 
 }
 
@@ -508,4 +515,53 @@ footer {
 .home-skill h3 {
     color: #111827;
     font-size: 0.95rem;
+}
+
+.home-projects {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.home-projects h2 {
+    color: #111827;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.home-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.home-project {
+    padding: 25px 18px;
+    background: #f5f7fb;
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+
+.home-project:hover {
+    transform: translateY(-4px);
+}
+
+.home-project span {
+    display: block;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.home-project h3 {
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.home-project p {
+    color: #6b7280;
+    font-size: 0.9rem;
 }
