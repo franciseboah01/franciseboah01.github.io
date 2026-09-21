@@ -133,3 +133,50 @@ footer {
     margin: 0 auto 25px;
     border: 5px solid #0b5ed7;
 }
+
+/* ===== Accueil professionnel ===== */
+
+.welcome {
+    color: #0b5ed7;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.hero h3 {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.intro {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    color: #6b7280;
+    font-size: 1.05rem;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #0b5ed7;
+    border: 2px solid #0b5ed7;
+}
+
+.btn-secondary:hover {
+    background: #0b5ed7;
+    color: white;
+}
