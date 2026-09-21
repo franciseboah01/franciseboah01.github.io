@@ -438,3 +438,23 @@ footer {
 .btn-whatsapp:hover {
     background: #1ebe5d;
 }
+.home-about {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.home-about h2 {
+    color: #111827;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.home-about p:not(.welcome) {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    color: #6b7280;
+}
