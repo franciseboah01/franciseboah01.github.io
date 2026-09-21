@@ -78,6 +78,22 @@
         height: 150px;
     }
 
+    .page-header {
+        padding: 30px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .content-card {
+        padding: 22px 18px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 * {
@@ -209,4 +225,64 @@ footer {
 .btn-secondary:hover {
     background: #0b5ed7;
     color: white;
+}
+
+.page-header {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.page-header h1 {
+    font-size: 2.3rem;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.page-header p:last-child {
+    color: #6b7280;
+}
+
+.content-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.content-card h2 {
+    color: #0b5ed7;
+    margin-bottom: 18px;
+}
+
+.content-card p {
+    color: #4b5563;
+    margin-bottom: 15px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-item {
+    padding: 20px;
+    background: #f5f7fb;
+    border-radius: 12px;
+    border-left: 4px solid #0b5ed7;
+}
+
+.info-item h3 {
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
 }
