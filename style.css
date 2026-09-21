@@ -110,6 +110,14 @@
         padding: 25px 20px;
     }
 
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        padding: 25px 20px;
+    }
+
 }
 
 * {
@@ -385,4 +393,39 @@ footer {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: bold;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.contact-card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid #0b5ed7;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-card h2 {
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.contact-card .btn {
+    margin-top: 5px;
 }
