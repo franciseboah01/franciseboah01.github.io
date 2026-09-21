@@ -483,6 +483,60 @@ header.scrolled {
     font-size: 0.95rem;
 }
 
+/* --- Chiffre clé (ex. "+150 personnes formées", page À propos) --- */
+.stat {
+    text-align: center;
+    margin: 5px 0 25px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    color: var(--bleu);
+}
+
+.stat span {
+    font-weight: bold;
+    color: var(--texte-moyen);
+}
+
+/* --- Bannières défilantes 16:9 (page À propos) ---
+   Sans JavaScript : défilement horizontal au doigt (ou à la souris),
+   chaque image s'aligne automatiquement (scroll-snap).
+   Chaque bannière fait 92 % de la largeur : on aperçoit un bout de la
+   suivante, ce qui indique qu'il y a d'autres images. */
+.banniere-defilante {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 10px;
+}
+
+.banniere {
+    flex: 0 0 92%;
+    scroll-snap-align: start;
+    margin: 0;
+}
+
+.banniere img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;       /* force le format bannière 16:9 */
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--ombre-carte);
+}
+
+.banniere figcaption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--texte-clair);
+    text-align: center;
+}
+
 
 /* ==========================================================================
    7. COMPÉTENCES / SERVICES / CONTACT
@@ -894,4 +948,4 @@ footer {
         font-size: 0.9rem;
     }
    }
-       
+   
