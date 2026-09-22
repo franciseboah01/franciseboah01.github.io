@@ -520,15 +520,16 @@ header.scrolled {
    la durée ci-dessous (ex. 6s = plus rapide, 15s = plus lent). */
 .banniere-defilante {
     width: 100%;
-    overflow: hidden;           /* cache tout ce qui dépasse de la fenêtre */
+    overflow: hidden;
+    position: relative;
     padding-bottom: 10px;
 }
 
 .banniere-track {
     display: flex;
-    width: max-content;         /* le ruban prend la largeur de ses 6 images */
     gap: 15px;
-    animation: defilement-banniere 9s linear infinite;
+    width: max-content;
+    animation: defilement-banniere 18s linear infinite;
 }
 
 /* Sur pause au survol / au doigt maintenu : permet de lire une légende */
@@ -546,6 +547,7 @@ header.scrolled {
 .banniere {
     flex: 0 0 100%;
     width: 100%;
+    max-width: 100%;
     margin: 0;
 }
 
@@ -553,15 +555,15 @@ header.scrolled {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9;       /* force le format bannière 16:9 */
+    aspect-ratio: 16 / 9; /* force le format bannière 16:9 */
     /* CORRECTION : "cover" recadrait et coupait les bords de la photo pour
        remplir le cadre 16:9. "contain" affiche la photo ENTIÈRE, quitte à
        laisser une fine bande de couleur si sa photo d'origine n'est pas
        parfaitement 16:9 (voir background ci-dessous). */
-    object-fit: contain;
-    background: var(--fond);
+    object-fit: cover;
     border-radius: 12px;
     box-shadow: var(--ombre-carte);
+    background: #eef2ff;
 }
 
 .banniere figcaption {
@@ -572,12 +574,10 @@ header.scrolled {
 }
 
 @keyframes defilement-banniere {
-    from {
+    0% {
         transform: translateX(0);
     }
-    to {
-        /* -50% : la moitié du ruban (= les 3 images "réelles"),
-           pas 100% (= le ruban entier, copies comprises) */
+    100% {
         transform: translateX(-50%);
     }
 }
