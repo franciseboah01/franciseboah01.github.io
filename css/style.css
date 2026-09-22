@@ -7,17 +7,17 @@
      3.  En-tête et navigation
      4.  Boutons
      5.  Page d'accueil
-     6.  Pages intérieures (bandeau + cartes)
+     6.  Pages intérieures (bandeau + cartes + bannières défilantes)
      7.  Compétences / Services / Contact
-     8.  Formulaire de service (NOUVEAU)
+     8.  Formulaire de service
      9.  Pied de page
      10. Responsive téléphone  ->  TOUJOURS EN DERNIER (voir explication)
 
    POURQUOI LE RESPONSIVE EST À LA FIN ?
    En CSS, à spécificité égale, la règle écrite EN DERNIER gagne.
-   Dans l'ancienne version, le bloc @media était au début du fichier : ses
-   règles étaient donc écrasées par les règles de base écrites après lui
-   (les grilles restaient sur plusieurs colonnes sur téléphone).
+   Si le bloc @media était placé au début du fichier, ses règles seraient
+   écrasées par les règles de base écrites après lui (les grilles
+   resteraient sur plusieurs colonnes sur téléphone).
    ========================================================================== */
 
 
@@ -501,35 +501,64 @@ header.scrolled {
     color: var(--texte-moyen);
 }
 
-/* --- Bannières défilantes 16:9 (page À propos) ---
+/* --- Bannières défilantes 16:9 (page À propos) -------------------------
    Défilement AUTOMATIQUE, en CSS pur (aucun JavaScript), de la droite
    vers la gauche, en boucle continue.
 
-   PRINCIPE
-   .banniere-defilante : la "fenêtre" visible (cache le débordement).
-   .banniere-track      : le long ruban de 6 images (3 réelles + 3 copies
-                           identiques dans about.html), qu'on fait glisser
-                           vers la gauche avec @keyframes.
-   Comme les images 4, 5, 6 sont des copies exactes des images 1, 2, 3,
-   au moment où le ruban a glissé de la moitié de sa largeur (-50%),
-   l'image 4 (= copie de la 1) est exactement à la place où était l'image 1
-   au départ : l'animation peut reboucler sans aucun saut visible.
+   LE PROBLÈME QU'ON CORRIGE ICI
+   La version précédente utilisait :
+       .banniere-track { width: max-content; }
+       .banniere       { flex: 0 0 100%; }
+   Or le "100%" d'un flex-item est relatif à la largeur de SON PARENT
+   flex (ici .banniere-track). Comme ce parent avait "width: max-content"
+   (largeur définie PAR son contenu), on tombait sur une référence
+   circulaire : le navigateur abandonnait le pourcentage et retombait sur
+   la taille intrinsèque de l'image (1280 px). Sur téléphone, chaque
+   bannière faisait donc 1280 px de large (image coupée, hauteur ~720 px,
+   défilement qui "défonce" l'écran) au lieu de la largeur de la carte.
 
-   VITESSE : 3 images x 3 secondes chacune = 9 secondes pour un tour complet
-   (demandé : "défile en 3 s"). Pour changer la vitesse, modifier uniquement
-   la durée ci-dessous (ex. 6s = plus rapide, 15s = plus lent). */
+   LA CORRECTION
+   On donne au ruban une largeur EXPLICITE (multiple entier de la fenêtre
+   visible), et chaque bannière une fraction exacte de cette largeur :
+       --nb-bannieres : nombre TOTAL de figures (3 réelles + 3 copies = 6)
+       track : width = 100% × --nb-bannieres
+       banniere : flex-basis = 100% / --nb-bannieres
+   Résultat : chaque bannière = 100 % de la largeur VISIBLE, quelle que
+   soit la taille de l'écran. Plus de référence circulaire, plus de
+   débordement.
+
+   BOUCLE SANS SAUT
+   On a supprimé le "gap: 15px" (qui faussait le calcul de translateX(-50%)
+   car les espaces ne comptent que 5 fois pour 6 images). L'espacement est
+   maintenant à l'intérieur de chaque bannière via "padding-right: 15px" :
+   chaque bannière fait donc exactement 100 % de la fenêtre, padding
+   compris (box-sizing: border-box est global). Le ruban vaut 6 × 100 %,
+   sa moitié vaut 3 × 100 % : au moment où on a glissé de -50 %, l'image 4
+   (= copie de la 1) est pile à la place de la 1. Boucle parfaite.
+
+   VITESSE : 9s pour un tour complet (= 3 bannières × 3 s).
+   Pour ralentir : remplacer 9s par 15s. Pour accélérer : 6s.
+   ------------------------------------------------------------------------- */
 .banniere-defilante {
     width: 100%;
-    overflow: hidden;
-    position: relative;
+    overflow: hidden;           /* cache tout ce qui dépasse de la fenêtre */
     padding-bottom: 10px;
 }
 
 .banniere-track {
     display: flex;
-    gap: 15px;
-    width: max-content;
-    animation: defilement-banniere 18s linear infinite;
+
+    /* Nombre TOTAL de figures dans le ruban.
+       3 images réelles + 3 copies identiques = 6.
+       Si tu ajoutes/retires une image dans about.html, mets à jour ce
+       nombre (et duplique/retire la copie correspondante). */
+    --nb-bannieres: 6;
+
+    /* Largeur explicite = 100 % × le nombre de figures.
+       C'est cette largeur qui sert de référence à translateX(-50%). */
+    width: calc(100% * var(--nb-bannieres));
+
+    animation: defilement-banniere 9s linear infinite;
 }
 
 /* Sur pause au survol / au doigt maintenu : permet de lire une légende */
@@ -538,32 +567,30 @@ header.scrolled {
     animation-play-state: paused;
 }
 
-/* CORRECTION : avant, "92vw" prenait 92 % de la largeur de l'ÉCRAN, sans
-   tenir compte des marges de .content-card (30px de chaque côté) ni de
-   celles de <main> (20px de chaque côté) : sur petit téléphone, l'image
-   débordait donc de la carte. "100%" prend maintenant 100 % de la largeur
-   RÉELLEMENT disponible à l'intérieur de la carte : une seule bannière
-   pleine largeur s'affiche à la fois, sans dépassement ni découpe. */
 .banniere {
-    flex: 0 0 100%;
-    width: 100%;
-    max-width: 100%;
+    /* Chaque bannière occupe exactement 1/N du ruban, soit 100 % de la
+       largeur visible de .banniere-defilante. */
+    flex: 0 0 calc(100% / var(--nb-bannieres));
     margin: 0;
+
+    /* L'espace ENTRE les bannières est mis ici (à la place du "gap" du
+       ruban) : chaque bannière reste strictement de la même largeur,
+       padding compris, ce qui garantit une boucle sans saut. */
+    padding-right: 15px;
 }
 
 .banniere img {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9; /* force le format bannière 16:9 */
-    /* CORRECTION : "cover" recadrait et coupait les bords de la photo pour
-       remplir le cadre 16:9. "contain" affiche la photo ENTIÈRE, quitte à
-       laisser une fine bande de couleur si sa photo d'origine n'est pas
-       parfaitement 16:9 (voir background ci-dessous). */
-    object-fit: cover;
+    aspect-ratio: 16 / 9;       /* force le format bannière 16:9 */
+    /* "contain" affiche la photo ENTIÈRE, quitte à laisser une fine bande
+       de couleur si l'original n'est pas parfaitement 16:9. "cover"
+       recadrerait et couperait les bords : à éviter ici. */
+    object-fit: contain;
+    background: var(--fond);
     border-radius: 12px;
     box-shadow: var(--ombre-carte);
-    background: #eef2ff;
 }
 
 .banniere figcaption {
@@ -574,22 +601,31 @@ header.scrolled {
 }
 
 @keyframes defilement-banniere {
-    0% {
+    from {
         transform: translateX(0);
     }
-    100% {
+    to {
+        /* -50% de la largeur du ruban = les 3 images réelles.
+           Ne pas mettre -100% : on reviendrait au point de départ AVANT
+           d'avoir vu les copies, et la boucle sauterait. */
         transform: translateX(-50%);
     }
 }
 
 /* Confort et accessibilité : si la personne a demandé au système de
-   réduire les animations, on arrête le défilement et on repasse
-   en glissement manuel au doigt / à la souris. */
+   réduire les animations, on coupe le défilement automatique et on
+   laisse le glissement manuel au doigt / à la souris. */
 @media (prefers-reduced-motion: reduce) {
     .banniere-track {
         animation: none;
+    }
+
+    /* On déplace l'ascenseur horizontal sur la fenêtre visible
+       (et non sur le ruban) pour que le doigt puisse balayer. */
+    .banniere-defilante {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
 
     .banniere {
@@ -747,7 +783,7 @@ header.scrolled {
 
 
 /* ==========================================================================
-   8. FORMULAIRE DE SERVICE (NOUVEAU)
+   8. FORMULAIRE DE SERVICE
    Utilisé dans contact.html ; logique dans js/main.js
    ========================================================================== */
 .form-group {
@@ -990,7 +1026,11 @@ footer {
         padding: 25px 20px;
     }
 
-    /* --- Bannières (page À propos) : le chiffre clé rétrécit un peu --- */
+    /* --- Bannières (page À propos) ---
+       Plus besoin de "corriger" la largeur ici : grâce à la section 6,
+       chaque bannière mesure 100 % de la largeur de sa carte, quelle que
+       soit la taille de l'écran. On ajuste juste le chiffre clé pour
+       qu'il reste lisible sur petit écran. */
     .stat strong {
         font-size: 2.4rem;
     }
@@ -1012,4 +1052,4 @@ footer {
     .footer-links a {
         font-size: 0.9rem;
     }
-       }
+}
