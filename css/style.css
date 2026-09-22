@@ -519,6 +519,7 @@ header.scrolled {
    (demandé : "défile en 3 s"). Pour changer la vitesse, modifier uniquement
    la durée ci-dessous (ex. 6s = plus rapide, 15s = plus lent). */
 .banniere-defilante {
+    width: 100%;
     overflow: hidden;           /* cache tout ce qui dépasse de la fenêtre */
     padding-bottom: 10px;
 }
@@ -536,17 +537,29 @@ header.scrolled {
     animation-play-state: paused;
 }
 
+/* CORRECTION : avant, "92vw" prenait 92 % de la largeur de l'ÉCRAN, sans
+   tenir compte des marges de .content-card (30px de chaque côté) ni de
+   celles de <main> (20px de chaque côté) : sur petit téléphone, l'image
+   débordait donc de la carte. "100%" prend maintenant 100 % de la largeur
+   RÉELLEMENT disponible à l'intérieur de la carte : une seule bannière
+   pleine largeur s'affiche à la fois, sans dépassement ni découpe. */
 .banniere {
-    flex: 0 0 92vw;              /* 92 % de la largeur de l'écran, pas du conteneur */
-    max-width: 420px;            /* évite des bannières trop larges sur grand écran */
+    flex: 0 0 100%;
+    width: 100%;
     margin: 0;
 }
 
 .banniere img {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;       /* force le format bannière 16:9 */
-    object-fit: cover;
+    /* CORRECTION : "cover" recadrait et coupait les bords de la photo pour
+       remplir le cadre 16:9. "contain" affiche la photo ENTIÈRE, quitte à
+       laisser une fine bande de couleur si sa photo d'origine n'est pas
+       parfaitement 16:9 (voir background ci-dessous). */
+    object-fit: contain;
+    background: var(--fond);
     border-radius: 12px;
     box-shadow: var(--ombre-carte);
 }
@@ -977,13 +990,7 @@ footer {
         padding: 25px 20px;
     }
 
-    /* --- Bannières (page À propos) : plus petites sur téléphone
-           pour ne pas occuper tout l'écran --- */
-    .banniere {
-        flex-basis: 78vw;
-        max-width: 320px;
-    }
-
+    /* --- Bannières (page À propos) : le chiffre clé rétrécit un peu --- */
     .stat strong {
         font-size: 2.4rem;
     }
@@ -1005,4 +1012,4 @@ footer {
     .footer-links a {
         font-size: 0.9rem;
     }
-}
+       }
