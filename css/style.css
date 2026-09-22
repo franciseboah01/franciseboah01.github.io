@@ -525,32 +525,59 @@ header.scrolled {
     color: var(--texte-moyen);
 }
 
-/* --- Bannières défilantes 16:9 (page À propos) ---
+/* --- Bannières défilantes 16:9 (page À propos) -------------------------
    Défilement AUTOMATIQUE, en CSS pur (aucun JavaScript), de la droite
    vers la gauche, en boucle continue.
 
-   PRINCIPE
-   .banniere-defilante : la "fenêtre" visible (cache le débordement).
-   .banniere-track      : le long ruban de 6 images (3 réelles + 3 copies
-                           identiques dans about.html), qu'on fait glisser
-                           vers la gauche avec @keyframes.
-   Comme les images 4, 5, 6 sont des copies exactes des images 1, 2, 3,
-   au moment où le ruban a glissé de la moitié de sa largeur (-50%),
-   l'image 4 (= copie de la 1) est exactement à la place où était l'image 1
-   au départ : l'animation peut reboucler sans aucun saut visible.
+   LE PROBLÈME QU'ON CORRIGE ICI
+   La version précédente utilisait :
+       .banniere-track { width: max-content; }
+       .banniere       { flex: 0 0 92vw; max-width: 500px; }
+   Or le "92vw" d'un flex-item peut dépasser la largeur RÉELLE de la carte
+   (sur téléphone : 92 % de l'écran + marges de main + padding de
+   .content-card = débordement). En plus, "gap: 15px" sur le ruban fausse
+   le calcul de translateX(-50%) (5 espaces pour 6 images au lieu de 6) :
+   la boucle saute à chaque tour.
 
-   VITESSE : 3 images x 3 secondes chacune = 9 secondes pour un tour complet
-   (demandé : "défile en 3 s"). Pour changer la vitesse, modifier uniquement
-   la durée ci-dessous (ex. 6s = plus rapide, 15s = plus lent). */
+   LA CORRECTION
+   On donne au ruban une largeur EXPLICITE (multiple entier de la fenêtre
+   visible), et chaque bannière une fraction exacte de cette largeur :
+       --nb-bannieres : nombre TOTAL de figures (3 réelles + 3 copies = 6)
+       track : width = 100% × --nb-bannieres
+       banniere : flex-basis = 100% / --nb-bannieres
+   Résultat : chaque bannière = 100 % de la largeur VISIBLE de la carte,
+   quelle que soit la taille de l'écran.
+
+   BOUCLE SANS SAUT
+   On a supprimé le "gap: 15px" (qui faussait le calcul) : l'espacement
+   est maintenant à l'intérieur de chaque bannière via
+   "padding-right: 15px", avec box-sizing: border-box (global).
+   Le ruban vaut 6 × 100 %, sa moitié vaut 3 × 100 % : au moment où on a
+   glissé de -50 %, l'image 4 (= copie de la 1) est pile à la place de
+   la 1. Boucle parfaite.
+
+   VITESSE : 9s pour un tour complet (= 3 bannières × 3 s).
+   Pour ralentir : 15s. Pour accélérer : 6s.
+   ------------------------------------------------------------------------- */
 .banniere-defilante {
+    width: 100%;
     overflow: hidden;           /* cache tout ce qui dépasse de la fenêtre */
     padding-bottom: 10px;
 }
 
 .banniere-track {
     display: flex;
-    width: max-content;         /* le ruban prend la largeur de ses 6 images */
-    gap: 15px;
+
+    /* Nombre TOTAL de figures dans le ruban.
+       3 images réelles + 3 copies identiques = 6.
+       Si tu ajoutes/retires une image dans about.html, mets à jour ce
+       nombre (et duplique/retire la copie correspondante). */
+    --nb-bannieres: 6;
+
+    /* Largeur explicite = 100 % × le nombre de figures.
+       C'est cette largeur qui sert de référence à translateX(-50%). */
+    width: calc(100% * var(--nb-bannieres));
+
     animation: defilement-banniere 9s linear infinite;
 }
 
@@ -561,16 +588,27 @@ header.scrolled {
 }
 
 .banniere {
-    flex: 0 0 92vw;              /* 92 % de la largeur de l'écran, pas du conteneur */
-    max-width: 500px;            /* évite des bannières trop larges sur grand écran */
+    /* Chaque bannière occupe exactement 1/N du ruban, soit 100 % de la
+       largeur visible de .banniere-defilante. */
+    flex: 0 0 calc(100% / var(--nb-bannieres));
     margin: 0;
+
+    /* L'espace ENTRE les bannières est mis ici (à la place du "gap" du
+       ruban) : chaque bannière reste strictement de la même largeur,
+       padding compris, ce qui garantit une boucle sans saut. */
+    padding-right: 15px;
 }
 
 .banniere img {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;       /* force le format bannière 16:9 */
-    object-fit: cover;
+    /* "contain" affiche la photo ENTIÈRE, quitte à laisser une fine bande
+       de couleur si l'original n'est pas parfaitement 16:9. "cover"
+       recadrerait et couperait les bords : à éviter ici. */
+    object-fit: contain;
+    background: var(--fond);
     border-radius: 12px;
     box-shadow: var(--ombre-carte);
 }
@@ -587,20 +625,27 @@ header.scrolled {
         transform: translateX(0);
     }
     to {
-        /* -50% : la moitié du ruban (= les 3 images "réelles"),
-           pas 100% (= le ruban entier, copies comprises) */
+        /* -50% de la largeur du ruban = les 3 images réelles.
+           Ne pas mettre -100% : on reviendrait au point de départ AVANT
+           d'avoir vu les copies, et la boucle sauterait. */
         transform: translateX(-50%);
     }
 }
 
 /* Confort et accessibilité : si la personne a demandé au système de
-   réduire les animations, on arrête le défilement et on repasse
-   en glissement manuel au doigt / à la souris. */
+   réduire les animations, on coupe le défilement automatique et on
+   laisse le glissement manuel au doigt / à la souris. */
 @media (prefers-reduced-motion: reduce) {
     .banniere-track {
         animation: none;
+    }
+
+    /* On déplace l'ascenseur horizontal sur la fenêtre visible
+       (et non sur le ruban) pour que le doigt puisse balayer. */
+    .banniere-defilante {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
 
     .banniere {
