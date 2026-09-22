@@ -77,8 +77,20 @@
                assets/formation-1.png
                assets/formation-2.png
                assets/formation-3.png
-             Conseil : les redimensionner à 1280 x 720 px avant l'envoi (site plus rapide).
-             Sur téléphone, on fait défiler les bannières avec le doigt. -->
+             Conseil : les redimensionner à 1280 x 720 px avant l'envoi
+             (site plus rapide, surtout sur téléphone).
+
+             BOUCLE SANS SAUT — RÈGLE À SUIVRE
+             Les 3 images sont écrites une première fois (1, 2, 3), puis
+             une seconde fois à l'identique (4, 5, 6) avec aria-hidden="true"
+             pour ne pas les lire deux fois aux lecteurs d'écran.
+             C'est ce doublon qui permet à l'animation CSS de repartir à
+             zéro sans "saut" visible.
+             Si tu ajoutes ou retires une image ici, pense à :
+               1) dupliquer (ou retirer) la copie correspondante ;
+               2) mettre à jour la variable --nb-bannieres dans style.css
+                  (section 6, .banniere-track) : elle doit valoir le
+                  NOMBRE TOTAL de figures (réelles + copies). -->
         <section class="content-card">
 
             <h2 style="text-align: center;">Ils ont été formés</h2>
@@ -89,43 +101,55 @@
             </div>
 
             <!-- Le défilement automatique est fait en CSS pur (@keyframes),
-                 voir .banniere-track dans style.css. Les 3 images sont dupliquées
-                 une fois ci-dessous : c'est ce qui permet à la boucle de repartir
-                 sans "saut" visible (voir le commentaire dans le CSS). -->
+                 voir .banniere-track dans style.css (section 6). -->
             <div class="banniere-defilante">
-    <div class="banniere-track">
+                <div class="banniere-track">
 
-        <figure class="banniere">
-            <img src="assets/formation-1.png" alt="Remise de certificats aux participants" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <!-- TODO : personnaliser chaque légende (thème, lieu, date) -->
+                    <figure class="banniere">
+                        <img src="assets/formation-1.png"
+                             alt="Remise de certificats aux participants d'une formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-        <figure class="banniere">
-            <img src="assets/formation-2.png" alt="Participants recevant leur certificat de formation" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <figure class="banniere">
+                        <img src="assets/formation-2.png"
+                             alt="Participants recevant leur certificat de formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-        <figure class="banniere">
-            <img src="assets/formation-3.png" alt="Cérémonie de remise de certificats après une formation" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <figure class="banniere">
+                        <img src="assets/formation-3.png"
+                             alt="Cérémonie de remise de certificats après une formation"
+                             width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-        <figure class="banniere">
-            <img src="assets/formation-1.png" alt="Remise de certificats aux participants" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <!-- Copies identiques des 3 images ci-dessus : elles
+                         servent uniquement à la boucle sans coupure.
+                         aria-hidden="true" et alt="" évitent que les
+                         lecteurs d'écran ne les annoncent en double. -->
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-1.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-        <figure class="banniere">
-            <img src="assets/formation-2.png" alt="Participants recevant leur certificat de formation" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-2.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-        <figure class="banniere">
-            <img src="assets/formation-3.png" alt="Cérémonie de remise de certificats après une formation" width="1280" height="720" loading="lazy">
-            <figcaption>Remise de certificats aux participants</figcaption>
-        </figure>
+                    <figure class="banniere" aria-hidden="true">
+                        <img src="assets/formation-3.png"
+                             alt="" width="1280" height="720" loading="lazy">
+                        <figcaption>Remise de certificats aux participants</figcaption>
+                    </figure>
 
-    </div>
+                </div>
             </div>
 
         </section>
@@ -306,5 +330,4 @@
     <footer id="site-footer"></footer>
 
 </body>
-    </html>
-    
+</html>
