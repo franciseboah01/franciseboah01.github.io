@@ -388,6 +388,65 @@ header.scrolled {
     font-size: 0.95rem;
 }
 
+/* --- Section "Témoignages" --- */
+.home-testimonials {
+    background: white;
+    padding: 35px 30px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--ombre-carte);
+}
+
+.home-testimonials h2 {
+    color: var(--titre);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.testimonial-card {
+    background: var(--fond);
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Étoiles : lettres "★" pleines, en doré */
+.testimonial-stars {
+    color: #f59e0b;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.testimonial-quote {
+    color: var(--texte-moyen);
+    font-style: italic;
+    margin-bottom: 15px;
+    flex-grow: 1;               /* pousse le nom vers le bas, cartes alignées */
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: var(--titre);
+    font-size: 0.95rem;
+}
+
+.testimonial-author span {
+    display: block;
+    font-weight: normal;
+    color: var(--texte-clair);
+    font-size: 0.85rem;
+}
+
+
 /* --- Section "Mes services" (aperçu) --- */
 .home-services {
     background: white;
@@ -886,6 +945,21 @@ footer {
     max-width: 500px;
 }
 
+/* Lien vers EDC, sous la bio du pied de page */
+.footer-edc-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.footer-edc-link:hover {
+    color: var(--bleu-pied-survol);
+    text-decoration: underline;
+}
+
 .footer-links {
     display: flex;
     flex-wrap: wrap;
@@ -914,7 +988,6 @@ footer {
 .footer-bottom p {
     margin: 0;
 }
-
 
 /* ==========================================================================
    10. RESPONSIVE — TÉLÉPHONES (écrans de 700px de large ou moins)
@@ -995,6 +1068,14 @@ footer {
 
     .home-skills-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-testimonials {
+        padding: 30px 18px;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
     }
 
     .home-services {
