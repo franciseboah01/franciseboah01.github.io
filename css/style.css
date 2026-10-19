@@ -881,15 +881,6 @@ header.scrolled {
     margin-top: 8px;
 }
 
-/* Les deux boutons de paiement de la session Particuliers, côte à côte
-   sur grand écran, l'un sous l'autre sur téléphone (voir section 10) */
-.formation-boutons-paiement {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-}
-
 /* --- Contact --- */
 .contact-grid {
     display: grid;
@@ -1213,3 +1204,4 @@ footer {
         font-size: 0.9rem;
     }
 }
+
