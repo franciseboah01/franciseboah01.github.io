@@ -133,10 +133,24 @@ header.scrolled {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: white;
     text-decoration: none;
     font-size: 1.4rem;
     font-weight: bold;
+}
+
+/* Photo de profil utilisée comme logo, à côté du nom */
+.logo-photo {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 2px solid white;
+    flex-shrink: 0;             /* ne rétrécit jamais, même si "Francis Eboah" est long */
 }
 
 .nav-links {
@@ -1066,6 +1080,12 @@ footer {
 
     .logo {
         font-size: 1.2rem;
+        gap: 8px;
+    }
+
+    .logo-photo {
+        width: 30px;
+        height: 30px;
     }
 
     .navbar {
@@ -1204,4 +1224,3 @@ footer {
         font-size: 0.9rem;
     }
 }
-
