@@ -246,20 +246,19 @@ function initialiserFormulaireEnseignants() {
         const whatsapp = donnees.get("whatsapp").trim();
         const modules = Array.from(modulesCoches).map(function (c) { return c.value; }).join(", ");
 
-        const lignes = [
+        // Message rédigé en phrases (3 paragraphes), plutôt qu'en liste à puces.
+        const paragraphes = [
             "Bonjour Francis,",
-            "",
-            "Je souhaite m'inscrire à la formation Bureautique (Enseignants contractuels).",
-            "",
-            "• Nom : " + nom,
-            "• Contact WhatsApp : " + whatsapp,
-            "• Modules choisis : " + modules,
-            "• Montant à payer : " + montant + " FCFA",
-            "• Lien de paiement : " + lienWave(montant)
+            "Je souhaite m'inscrire à la formation Bureautique pour enseignants " +
+                "contractuels. Je m'appelle " + nom + " et vous pouvez me joindre " +
+                "sur WhatsApp au " + whatsapp + ".",
+            "J'ai choisi les modules suivants : " + modules + ". Le montant à " +
+                "régler est de " + montant + " FCFA, que je peux payer via ce lien : " +
+                lienWave(montant) + "."
         ];
 
         const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
-            "?text=" + encodeURIComponent(lignes.join("\n"));
+            "?text=" + encodeURIComponent(paragraphes.join("\n\n"));
 
         window.open(adresse, "_blank", "noopener");
     });
@@ -285,20 +284,20 @@ function initialiserFormulaireParticulier() {
         const whatsapp = donnees.get("whatsapp").trim();
         const formation = donnees.get("formation");
 
-        const lignes = [
+        // Message rédigé en phrases (3 paragraphes), plutôt qu'en liste à puces.
+        const paragraphes = [
             "Bonjour Francis,",
-            "",
-            "Je souhaite m'inscrire à une formation (Particulier).",
-            "",
-            "• Nom : " + nom,
-            "• Contact WhatsApp : " + whatsapp,
-            "• Formation choisie : " + formation,
-            "• Frais d'inscription : " + montantInscription + " FCFA — " + lienWave(montantInscription),
-            "• Frais de formation : " + montantFormation + " FCFA — " + lienWave(montantFormation)
+            "Je souhaite m'inscrire à une formation proposée aux particuliers. " +
+                "Je m'appelle " + nom + " et vous pouvez me joindre sur WhatsApp " +
+                "au " + whatsapp + ".",
+            "La formation choisie est : " + formation + ". Les frais " +
+                "d'inscription s'élèvent à " + montantInscription + " FCFA (" +
+                lienWave(montantInscription) + "), et les frais de formation à " +
+                montantFormation + " FCFA (" + lienWave(montantFormation) + ")."
         ];
 
         const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
-            "?text=" + encodeURIComponent(lignes.join("\n"));
+            "?text=" + encodeURIComponent(paragraphes.join("\n\n"));
 
         window.open(adresse, "_blank", "noopener");
     });
