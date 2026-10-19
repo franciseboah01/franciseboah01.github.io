@@ -823,6 +823,73 @@ header.scrolled {
     align-self: flex-start;
 }
 
+/* --- Formations (page formations.html) ---
+   Chaque session (Enseignants / Particuliers) est une .content-card classique,
+   avec un ou plusieurs blocs .formation-prix au-dessus du formulaire. */
+.formation-prix {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: var(--bleu-pale);
+    color: var(--bleu-fonce);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.formation-prix strong {
+    font-size: 1.4rem;
+}
+
+.formation-prix span {
+    color: var(--texte-moyen);
+    font-size: 0.9rem;
+}
+
+/* Cases à cocher / boutons radio des formulaires de formation */
+.form-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--fond);
+    border-radius: 8px;
+    font-weight: normal;        /* annule le gras hérité de "label" */
+    cursor: pointer;
+}
+
+.form-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--bleu);  /* colore la case/le rond cochés en bleu */
+    flex-shrink: 0;
+}
+
+/* Message d'erreur affiché par main.js si aucun module n'est coché
+   (session Enseignants : au moins une case requise) */
+.form-erreur {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* Les deux boutons de paiement de la session Particuliers, côte à côte
+   sur grand écran, l'un sous l'autre sur téléphone (voir section 10) */
+.formation-boutons-paiement {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
 /* --- Contact --- */
 .contact-grid {
     display: grid;
@@ -988,6 +1055,7 @@ footer {
 .footer-bottom p {
     margin: 0;
 }
+
 
 /* ==========================================================================
    10. RESPONSIVE — TÉLÉPHONES (écrans de 700px de large ou moins)
