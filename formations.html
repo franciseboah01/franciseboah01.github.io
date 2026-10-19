@@ -13,7 +13,7 @@
 
 <body>
 
-    <!-- EN-TÊTE : injecté par js/main.js -->
+    <!-- EN-TÊTE : injecté par js/main.js (components/header.html) -->
     <header id="site-header"></header>
 
     <main>
@@ -26,20 +26,20 @@
             <h1>Inscrivez-vous à une formation</h1>
 
             <p>
-                Découvrez nos parcours de formation en bureautique et en
-                développement numérique. Remplissez le formulaire, puis
-                réglez votre inscription par Wave.
+                Deux parcours disponibles : un tarif dédié aux enseignants
+                et des formations individuelles ouvertes à tous.
+                Remplissez le formulaire, puis réglez votre inscription par Wave.
             </p>
 
         </section>
 
-        <!-- SESSION 1 : FORMATION EN BUREAUTIQUE -->
+        <!-- SESSION 1 : ENSEIGNANTS -->
         <section class="content-card">
 
-            <h2>Session 1 — Bureautique</h2>
+            <h2>Session 1 — Enseignants</h2>
 
             <p>
-                Formation bureautique adaptée à vos besoins professionnels.
+                Formation bureautique pensée pour les enseignants.
                 Cochez un ou plusieurs modules, puis inscrivez-vous.
             </p>
 
@@ -63,10 +63,12 @@
                            autocomplete="tel">
                 </div>
 
+                <!-- Au moins un module doit être sélectionné. -->
                 <div class="form-group">
                     <label>Modules souhaités</label>
 
                     <div class="form-checkboxes">
+
                         <label class="form-checkbox">
                             <input type="checkbox" name="module" value="Word">
                             Word
@@ -81,6 +83,7 @@
                             <input type="checkbox" name="module" value="PowerPoint">
                             PowerPoint
                         </label>
+
                     </div>
 
                     <p class="form-erreur" id="ens-erreur-modules" hidden>
@@ -108,8 +111,8 @@
 
             <p>
                 Formations individuelles en bureautique, développement
-                d'applications web et mobile, ou création de sites
-                e-commerce. Choisissez une formation, puis inscrivez-vous.
+                d'applications web et mobile, ou création de sites e-commerce.
+                Choisissez une formation, puis inscrivez-vous.
             </p>
 
             <div class="formation-prix">
@@ -139,10 +142,12 @@
                            autocomplete="tel">
                 </div>
 
+                <!-- Une seule formation peut être sélectionnée. -->
                 <div class="form-group">
                     <label>Formation souhaitée</label>
 
                     <div class="form-checkboxes">
+
                         <label class="form-checkbox">
                             <input type="radio" name="formation"
                                    value="Bureautique" required>
@@ -162,6 +167,7 @@
                                    required>
                             Création de site e-commerce et boutique en ligne
                         </label>
+
                     </div>
                 </div>
 
