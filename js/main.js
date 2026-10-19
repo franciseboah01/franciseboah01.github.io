@@ -9,8 +9,9 @@
      5. En-tête fixe (ombre + version compacte au défilement)
      6. Année automatique dans le pied de page
      7. Formulaire de service -> message WhatsApp
-     8. Favicon (icône de l'onglet)
-     9. Démarrage
+     8. Formulaires de formation -> message WhatsApp (formations.html)
+     9. Favicon (icône de l'onglet)
+     10. Démarrage
 
    Chargé dans chaque page avec :  <script src="js/main.js" defer></script>
    ("defer" = le script attend que le HTML soit lu avant de s'exécuter)
@@ -24,6 +25,8 @@
 const CONFIG = {
     // Numéro WhatsApp au format international, sans "+" ni espaces
     whatsappNumber: "2250748746140",
+    // Identifiant du compte marchand Wave (page formations.html, section 8)
+    waveMarchand: "M_ci_UUaEOonX_zos",
     // Dossier des morceaux de page réutilisables
     componentsPath: "components/",
     // Icône affichée dans l'onglet du navigateur
@@ -200,7 +203,109 @@ function initialiserFormulaireService() {
 }
 
 
-/* ---------- 8. FAVICON ----------
+/* ---------- 8. FORMULAIRES DE FORMATION -> WHATSAPP ----------
+   Présents uniquement dans formations.html (deux formulaires distincts).
+   Même principe que le formulaire de service (section 7) : aucun serveur,
+   le visiteur envoie lui-même le message depuis son propre WhatsApp.
+
+   LIEN DE PAIEMENT WAVE
+   Le lien Wave accepte un montant dans son adresse (...?amount=2020).
+   CONFIG.lienWave(montant) reconstruit ce lien pour n'importe quel montant,
+   sans dupliquer l'adresse à chaque endroit du code. Si l'identifiant
+   marchand Wave change un jour, il suffit de le modifier UNE SEULE FOIS
+   dans CONFIG.waveMarchand (section 1). */
+function lienWave(montant) {
+    return "https://pay.wave.com/m/" + CONFIG.waveMarchand + "/c/ci/?amount=" + montant;
+}
+
+// --- Session 1 : Enseignants contractuels (cases à cocher, tarif fixe) ---
+function initialiserFormulaireEnseignants() {
+    const formulaire = document.getElementById("form-enseignants");
+    if (!formulaire) return; // autres pages : pas de formulaire
+
+    const montant = formulaire.dataset.montant; // "2020", lu depuis le HTML
+    const erreurModules = document.getElementById("ens-erreur-modules");
+
+    formulaire.addEventListener("submit", function (evenement) {
+        evenement.preventDefault();
+
+        // Les cases à cocher ne sont pas vérifiables par "required" du
+        // navigateur (chacune est indépendante) : on vérifie nous-mêmes
+        // qu'au moins une est cochée avant de valider le reste du formulaire.
+        const modulesCoches = formulaire.querySelectorAll('input[name="module"]:checked');
+        if (modulesCoches.length === 0) {
+            erreurModules.hidden = false;
+            return;
+        }
+        erreurModules.hidden = true;
+
+        if (!formulaire.reportValidity()) return;
+
+        const donnees = new FormData(formulaire);
+        const nom = donnees.get("nom").trim();
+        const whatsapp = donnees.get("whatsapp").trim();
+        const modules = Array.from(modulesCoches).map(function (c) { return c.value; }).join(", ");
+
+        const lignes = [
+            "Bonjour Francis,",
+            "",
+            "Je souhaite m'inscrire à la formation Bureautique (Enseignants contractuels).",
+            "",
+            "• Nom : " + nom,
+            "• Contact WhatsApp : " + whatsapp,
+            "• Modules choisis : " + modules,
+            "• Montant à payer : " + montant + " FCFA",
+            "• Lien de paiement : " + lienWave(montant)
+        ];
+
+        const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
+            "?text=" + encodeURIComponent(lignes.join("\n"));
+
+        window.open(adresse, "_blank", "noopener");
+    });
+}
+
+// --- Session 2 : Particuliers (un seul choix, deux montants fixes) ---
+function initialiserFormulaireParticulier() {
+    const formulaire = document.getElementById("form-particulier");
+    if (!formulaire) return; // autres pages : pas de formulaire
+
+    const montantInscription = formulaire.dataset.montantInscription; // "5050"
+    const montantFormation = formulaire.dataset.montantFormation;     // "10100"
+
+    formulaire.addEventListener("submit", function (evenement) {
+        evenement.preventDefault();
+
+        // Les boutons radio ont déjà "required" dans le HTML : reportValidity()
+        // suffit pour vérifier qu'une formation a bien été choisie.
+        if (!formulaire.reportValidity()) return;
+
+        const donnees = new FormData(formulaire);
+        const nom = donnees.get("nom").trim();
+        const whatsapp = donnees.get("whatsapp").trim();
+        const formation = donnees.get("formation");
+
+        const lignes = [
+            "Bonjour Francis,",
+            "",
+            "Je souhaite m'inscrire à une formation (Particulier).",
+            "",
+            "• Nom : " + nom,
+            "• Contact WhatsApp : " + whatsapp,
+            "• Formation choisie : " + formation,
+            "• Frais d'inscription : " + montantInscription + " FCFA — " + lienWave(montantInscription),
+            "• Frais de formation : " + montantFormation + " FCFA — " + lienWave(montantFormation)
+        ];
+
+        const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
+            "?text=" + encodeURIComponent(lignes.join("\n"));
+
+        window.open(adresse, "_blank", "noopener");
+    });
+}
+
+
+/* ---------- 9. FAVICON ----------
    Ajoute l'icône de l'onglet à TOUTES les pages sans toucher à leur HTML.
    Si une page déclare déjà son icône dans <head>, on ne fait rien. */
 function ajouterFavicon() {
@@ -238,7 +343,8 @@ async function demarrer() {
     initialiserEnteteFixe();
     mettreAJourAnnee();
     initialiserFormulaireService();
+    initialiserFormulaireEnseignants();
+    initialiserFormulaireParticulier();
 }
 
 demarrer();
-           
