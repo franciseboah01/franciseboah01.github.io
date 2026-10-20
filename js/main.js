@@ -27,6 +27,9 @@ const CONFIG = {
     whatsappNumber: "2250748746140",
     // Identifiant du compte marchand Wave (page formations.html, section 8)
     waveMarchand: "M_ci_UUaEOonX_zos",
+    // Lien du groupe WhatsApp de la communauté EDC (repris dans les messages
+    // de formations.html, section 8, et le bouton du pied de page)
+    lienCommunaute: "https://chat.whatsapp.com/JefwyV0An08DUR2MvyoDQ3",
     // Dossier des morceaux de page réutilisables
     componentsPath: "components/",
     // Icône affichée dans l'onglet du navigateur
@@ -246,15 +249,17 @@ function initialiserFormulaireEnseignants() {
         const whatsapp = donnees.get("whatsapp").trim();
         const modules = Array.from(modulesCoches).map(function (c) { return c.value; }).join(", ");
 
-        // Message rédigé en phrases (3 paragraphes), plutôt qu'en liste à puces.
+        // Message rédigé en phrases (4 paragraphes), plutôt qu'en liste à puces.
         const paragraphes = [
             "Bonjour Francis,",
-            "Je souhaite m'inscrire à la formation Bureautique pour enseignants " +
-                "contractuels. Je m'appelle " + nom + " et vous pouvez me joindre " +
+            "Je souhaite m'inscrire à la formation Bureautique pour enseignants. " +
+                "Je m'appelle " + nom + " et vous pouvez me joindre " +
                 "sur WhatsApp au " + whatsapp + ".",
             "J'ai choisi les modules suivants : " + modules + ". Le montant à " +
                 "régler est de " + montant + " FCFA, que je peux payer via ce lien : " +
-                lienWave(montant) + "."
+                lienWave(montant) + ". Je vous envoie la capture d'écran du " +
+                "paiement juste après.",
+            "Je rejoins aussi la communauté EDC sur WhatsApp : " + CONFIG.lienCommunaute + "."
         ];
 
         const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
@@ -284,7 +289,7 @@ function initialiserFormulaireParticulier() {
         const whatsapp = donnees.get("whatsapp").trim();
         const formation = donnees.get("formation");
 
-        // Message rédigé en phrases (3 paragraphes), plutôt qu'en liste à puces.
+        // Message rédigé en phrases (4 paragraphes), plutôt qu'en liste à puces.
         const paragraphes = [
             "Bonjour Francis,",
             "Je souhaite m'inscrire à une formation proposée aux particuliers. " +
@@ -293,7 +298,9 @@ function initialiserFormulaireParticulier() {
             "La formation choisie est : " + formation + ". Les frais " +
                 "d'inscription s'élèvent à " + montantInscription + " FCFA (" +
                 lienWave(montantInscription) + "), et les frais de formation à " +
-                montantFormation + " FCFA (" + lienWave(montantFormation) + ")."
+                montantFormation + " FCFA (" + lienWave(montantFormation) + "). " +
+                "Je vous envoie la capture d'écran des paiements juste après.",
+            "Je rejoins aussi la communauté EDC sur WhatsApp : " + CONFIG.lienCommunaute + "."
         ];
 
         const adresse = "https://wa.me/" + CONFIG.whatsappNumber +
