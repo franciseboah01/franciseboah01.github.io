@@ -26,7 +26,7 @@ const CONFIG = {
     // Numéro WhatsApp au format international, sans "+" ni espaces
     whatsappNumber: "2250748746140",
     // Identifiant du compte marchand Wave (page formations.html, section 8)
-    waveMarchand: "M_ci_UUaEOonX_zos",
+    waveMarchand: "M_ci_eHBwfy2zeGi-",
     // Lien du groupe WhatsApp de la communauté EDC (repris dans les messages
     // de formations.html, section 8, et le bouton du pied de page)
     lienCommunaute: "https://chat.whatsapp.com/JefwyV0An08DUR2MvyoDQ3",
