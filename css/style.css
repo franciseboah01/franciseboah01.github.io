@@ -203,6 +203,13 @@ header.scrolled {
     cursor: pointer;
 }
 
+/* Barre de navigation du bas (style application) : cachée sur ordinateur,
+   affichée uniquement sur téléphone (voir section 10). Chargée depuis
+   components/bottom-nav.html par js/main.js. */
+.bottom-nav {
+    display: none;
+}
+
 
 /* ==========================================================================
    4. BOUTONS
@@ -1222,5 +1229,74 @@ footer {
 
     .footer-links a {
         font-size: 0.9rem;
+    }
+
+    /* --- Barre de navigation du bas (style application) ---
+       Place pour son propre contenu + la zone "encoche" des téléphones
+       récents (env(safe-area-inset-bottom) = 0 sur les téléphones sans
+       encoche, donc sans risque ailleurs). */
+    body {
+        padding-bottom: calc(60px + env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        background: white;
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+        padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav a {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 6px 2px;
+        color: var(--texte-clair);
+        text-decoration: none;
+        font-size: 0.7rem;
+        font-weight: bold;
+        border-radius: 10px;
+        transition: color 0.2s, background 0.2s;
+    }
+
+    .bottom-nav a svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Icône EDC : la mini-icône de l'app plutôt qu'un pictogramme */
+    .bottom-nav-edc img {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+    }
+
+    .bottom-nav a:hover,
+    .bottom-nav a:focus-visible {
+        background: var(--bleu-pale);
+        color: var(--bleu);
+    }
+
+    /* Page courante (classe ajoutée par main.js, même logique que le menu du haut) */
+    .bottom-nav a.active {
+        color: var(--bleu);
+    }
+
+    .bottom-nav a.active svg {
+        stroke-width: 2.2;
     }
 }
