@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Formations | Francis Eboah</title>
-    <meta name="description" content="Formations en bureautique, développement web et mobile proposées par Francis Eboah : inscription en ligne pour enseignants et particuliers.">
+    <meta name="description" content="Formations en digital & design, bureautique, développement web et mobile proposées par Francis Eboah (EDC) : inscription en ligne.">
 
     <!-- Aperçu de partage (WhatsApp, Facebook...) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Formations | Francis Eboah">
-    <meta property="og:description" content="Formations en bureautique, développement web et mobile proposées par Francis Eboah : inscription en ligne pour enseignants et particuliers.">
+    <meta property="og:description" content="Formations en digital & design, bureautique, développement web et mobile proposées par Francis Eboah (EDC) : inscription en ligne.">
     <meta property="og:image" content="https://franciseboah01.github.io/assets/og-image.png">
     <meta property="og:url" content="https://franciseboah01.github.io/formations.html">
     <meta property="og:locale" content="fr_FR">
@@ -35,15 +35,15 @@
             <h1>Inscrivez-vous à une formation</h1>
 
             <p>
-                Deux parcours disponibles : un tarif dédié aux enseignants,
+                Deux parcours disponibles : la formation Digital &amp; Design,
                 et des formations individuelles ouvertes à tous.
                 Remplissez le formulaire, puis réglez votre inscription par Wave.
             </p>
 
         </section>
 
-        <!-- ================= SESSION 1 : ENSEIGNANTS =================
-             Les 3 modules sont des CASES À COCHER (checkbox) : l'enseignant peut
+        <!-- ================= SESSION 1 : DIGITAL & DESIGN =================
+             Les 3 modules sont des CASES À COCHER (checkbox) : la personne peut
              en choisir un, deux ou les trois. Le tarif reste fixe (2 020 FCFA),
              quel que soit le nombre de modules cochés : ce n'est pas un prix
              "par module", mais le tarif d'accès à la session.
@@ -62,11 +62,11 @@
              Wave n'apparaît que dans le message WhatsApp envoyé. -->
         <section class="content-card">
 
-            <h2>Session 1 — Enseignants</h2>
+            <h2>Session 1 — Digital &amp; Design</h2>
 
             <p>
-                Formation bureautique pensée pour les enseignants.
-                Cochez un ou plusieurs modules, puis inscrivez-vous.
+                Création visuelle et présence numérique. Cochez un ou
+                plusieurs modules, puis inscrivez-vous.
             </p>
 
             <div class="formation-prix">
@@ -74,16 +74,16 @@
                 <span>tarif unique, frais de transaction inclus (1 %)</span>
             </div>
 
-            <form id="form-enseignants" data-montant="2020">
+            <form id="form-digital" data-montant="2020">
 
                 <div class="form-group">
-                    <label for="ens-nom">Votre nom</label>
-                    <input type="text" id="ens-nom" name="nom" required autocomplete="name" minlength="2">
+                    <label for="dig-nom">Votre nom</label>
+                    <input type="text" id="dig-nom" name="nom" required autocomplete="name" minlength="2">
                 </div>
 
                 <div class="form-group">
-                    <label for="ens-whatsapp">Contact WhatsApp</label>
-                    <input type="tel" id="ens-whatsapp" name="whatsapp" required
+                    <label for="dig-whatsapp">Contact WhatsApp</label>
+                    <input type="tel" id="dig-whatsapp" name="whatsapp" required
                            placeholder="Ex. 07 00 00 00 00" autocomplete="tel"
                            inputmode="tel" pattern="[0-9 ]{8,15}"
                            title="Uniquement des chiffres (et espaces), ex. 07 00 00 00 00">
@@ -96,23 +96,23 @@
 
                     <div class="form-checkboxes">
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="Word">
-                            Word
+                            <input type="checkbox" name="module" value="Canva">
+                            Canva
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="Excel">
-                            Excel
+                            <input type="checkbox" name="module" value="Réseaux sociaux">
+                            Réseaux sociaux
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="PowerPoint">
-                            PowerPoint
+                            <input type="checkbox" name="module" value="Logo et identité visuelle">
+                            Logo &amp; identité visuelle
                         </label>
                     </div>
 
                     <!-- Message d'erreur affiché par main.js si aucune case n'est cochée -->
-                    <p class="form-erreur" id="ens-erreur-modules" hidden>
+                    <p class="form-erreur" id="dig-erreur-modules" hidden>
                         Choisissez au moins un module.
                     </p>
                 </div>

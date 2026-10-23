@@ -7,7 +7,7 @@ Site statique publié avec GitHub Pages : https://franciseboah01.github.io
 ```
 franciseboah01.github.io/
 ├── index.html · about.html · skills.html · services.html · contact.html
-├── formations.html        → inscription (enseignants + particuliers) avec paiement Wave
+├── formations.html        → inscription (Digital & Design + particuliers) avec paiement Wave
 ├── 404.html               → page affichée par GitHub Pages pour une adresse inconnue
 ├── manifest.json          → identité de l'app installable (nom, icônes, couleurs)
 ├── sw.js                  → service worker (installation + hors-ligne)
