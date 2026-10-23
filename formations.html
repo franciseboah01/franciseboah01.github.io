@@ -18,7 +18,7 @@
 
     <main>
 
-        <!-- BANDEAU DE TITRE -->
+        <!-- ================= BANDEAU DE TITRE ================= -->
         <section class="page-header">
 
             <p class="welcome">MES FORMATIONS</p>
@@ -26,14 +26,31 @@
             <h1>Inscrivez-vous à une formation</h1>
 
             <p>
-                Deux parcours disponibles : un tarif dédié aux enseignants
+                Deux parcours disponibles : un tarif dédié aux enseignants,
                 et des formations individuelles ouvertes à tous.
                 Remplissez le formulaire, puis réglez votre inscription par Wave.
             </p>
 
         </section>
 
-        <!-- SESSION 1 : ENSEIGNANTS -->
+        <!-- ================= SESSION 1 : ENSEIGNANTS =================
+             Les 3 modules sont des CASES À COCHER (checkbox) : l'enseignant peut
+             en choisir un, deux ou les trois. Le tarif reste fixe (2 020 FCFA),
+             quel que soit le nombre de modules cochés : ce n'est pas un prix
+             "par module", mais le tarif d'accès à la session.
+
+             D'OÙ VIENT 2 020 FCFA ?
+             Tarif de base : 2 000 FCFA + 1 % de frais de transaction (20 FCFA)
+             = 2 020 FCFA. Si le tarif de base change, recalculer :
+             nouveau tarif × 1,01, et mettre à jour CE MONTANT à 2 endroits :
+               1) le texte affiché ci-dessous ("2 020 FCFA")
+               2) l'attribut data-montant du formulaire (utilisé par main.js,
+                  qui construit lui-même le lien Wave correspondant)
+
+             PAS DE BOUTON DE PAIEMENT DIRECT SUR LA PAGE : volontaire. Le
+             visiteur doit passer par le formulaire WhatsApp ci-dessous, pour
+             que Francis sache qui s'inscrit avant tout paiement. Le lien
+             Wave n'apparaît que dans le message WhatsApp envoyé. -->
         <section class="content-card">
 
             <h2>Session 1 — Enseignants</h2>
@@ -45,30 +62,28 @@
 
             <div class="formation-prix">
                 <strong>2 020 FCFA</strong>
-                <span>Tarif unique, frais de transaction inclus (1 %)</span>
+                <span>tarif unique, frais de transaction inclus (1 %)</span>
             </div>
 
             <form id="form-enseignants" data-montant="2020">
 
                 <div class="form-group">
                     <label for="ens-nom">Votre nom</label>
-                    <input type="text" id="ens-nom" name="nom"
-                           required autocomplete="name">
+                    <input type="text" id="ens-nom" name="nom" required autocomplete="name">
                 </div>
 
                 <div class="form-group">
                     <label for="ens-whatsapp">Contact WhatsApp</label>
-                    <input type="tel" id="ens-whatsapp" name="whatsapp"
-                           required placeholder="Ex. 07 00 00 00 00"
-                           autocomplete="tel">
+                    <input type="tel" id="ens-whatsapp" name="whatsapp" required
+                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel">
                 </div>
 
-                <!-- Au moins un module doit être sélectionné. -->
+                <!-- Cases à cocher : au moins une doit être cochée.
+                     main.js vérifie cette règle avant d'ouvrir WhatsApp. -->
                 <div class="form-group">
                     <label>Modules souhaités</label>
 
                     <div class="form-checkboxes">
-
                         <label class="form-checkbox">
                             <input type="checkbox" name="module" value="Word">
                             Word
@@ -83,9 +98,9 @@
                             <input type="checkbox" name="module" value="PowerPoint">
                             PowerPoint
                         </label>
-
                     </div>
 
+                    <!-- Message d'erreur affiché par main.js si aucune case n'est cochée -->
                     <p class="form-erreur" id="ens-erreur-modules" hidden>
                         Choisissez au moins un module.
                     </p>
@@ -96,78 +111,78 @@
                 </button>
 
                 <p class="form-note">
-                    WhatsApp s'ouvrira avec vos informations et le lien
-                    de paiement Wave.
+                    WhatsApp s'ouvrira avec vos informations et le lien de paiement Wave.
                 </p>
 
             </form>
 
         </section>
 
-        <!-- SESSION 2 : PARTICULIERS -->
+        <!-- ================= SESSION 2 : PARTICULIERS =================
+             Les 3 formations sont des BOUTONS RADIO : une seule formation
+             peut être choisie à la fois (contrairement à la session 1).
+
+             DEUX MONTANTS SÉPARÉS, TOUJOURS LES MÊMES quelle que soit la
+             formation choisie :
+               - Inscription : 5 050 FCFA (5 000 + 1 %)
+               - Formation   : 10 100 FCFA (10 000 + 1 %)
+             Les deux sont dus. Comme Wave n'accepte qu'un montant par lien,
+             main.js construit DEUX liens de paiement séparés dans le message
+             WhatsApp envoyé (pas de bouton de paiement direct sur la page :
+             voir la note de la session 1 ci-dessus). -->
         <section class="content-card">
 
             <h2>Session 2 — Particuliers</h2>
 
             <p>
                 Formations individuelles en bureautique, développement
-                d'applications web et mobile, ou création de sites e-commerce.
+                d'applications web et mobile, ou création de site e-commerce.
                 Choisissez une formation, puis inscrivez-vous.
             </p>
 
             <div class="formation-prix">
                 <strong>5 050 FCFA</strong>
-                <span>Frais d'inscription (1 % inclus)</span>
+                <span>frais d'inscription (1 % inclus)</span>
             </div>
 
             <div class="formation-prix">
                 <strong>10 100 FCFA</strong>
-                <span>Frais de formation (1 % inclus) — à régler en ligne</span>
+                <span>frais de formation (1 % inclus) — à régler en ligne</span>
             </div>
 
-            <form id="form-particulier"
-                  data-montant-inscription="5050"
-                  data-montant-formation="10100">
+            <form id="form-particulier" data-montant-inscription="5050" data-montant-formation="10100">
 
                 <div class="form-group">
                     <label for="part-nom">Votre nom</label>
-                    <input type="text" id="part-nom" name="nom"
-                           required autocomplete="name">
+                    <input type="text" id="part-nom" name="nom" required autocomplete="name">
                 </div>
 
                 <div class="form-group">
                     <label for="part-whatsapp">Contact WhatsApp</label>
-                    <input type="tel" id="part-whatsapp" name="whatsapp"
-                           required placeholder="Ex. 07 00 00 00 00"
-                           autocomplete="tel">
+                    <input type="tel" id="part-whatsapp" name="whatsapp" required
+                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel">
                 </div>
 
-                <!-- Une seule formation peut être sélectionnée. -->
+                <!-- Boutons radio : un seul choix possible, le navigateur
+                     impose la sélection grâce à "required" sur chaque bouton. -->
                 <div class="form-group">
                     <label>Formation souhaitée</label>
 
                     <div class="form-checkboxes">
-
                         <label class="form-checkbox">
-                            <input type="radio" name="formation"
-                                   value="Bureautique" required>
+                            <input type="radio" name="formation" value="Bureautique" required>
                             Bureautique (Word, Excel, PowerPoint)
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="radio" name="formation"
-                                   value="Création d'applications web et mobile"
-                                   required>
+                            <input type="radio" name="formation" value="Création d'applications web et mobile" required>
                             Création d'applications web et mobile
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="radio" name="formation"
-                                   value="Création de site e-commerce et boutique en ligne"
-                                   required>
+                            <input type="radio" name="formation" value="Création de site e-commerce et boutique en ligne" required>
                             Création de site e-commerce et boutique en ligne
                         </label>
-
                     </div>
                 </div>
 
@@ -176,8 +191,8 @@
                 </button>
 
                 <p class="form-note">
-                    WhatsApp s'ouvrira avec vos informations et les deux
-                    liens de paiement Wave (inscription puis formation).
+                    WhatsApp s'ouvrira avec vos informations et les deux liens de paiement Wave
+                    (inscription puis formation).
                 </p>
 
             </form>
@@ -186,7 +201,7 @@
 
     </main>
 
-    <!-- PIED DE PAGE : injecté par js/main.js -->
+    <!-- PIED DE PAGE : injecté par js/main.js (components/footer.html) -->
     <footer id="site-footer"></footer>
 
 </body>
