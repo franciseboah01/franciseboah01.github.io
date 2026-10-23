@@ -37,6 +37,17 @@ const CONFIG = {
 };
 
 
+/* ---------- 1bis. CONFIGURATION PWA (application installable) ----------
+   Regroupé ici pour rester facile à retrouver / modifier d'un bloc. */
+const CONFIG_PWA = {
+    manifestPath: "manifest.json",
+    serviceWorkerPath: "sw.js",
+    themeColor: "#000f6e",           // bleu foncé du logo EDC (identique à manifest.json)
+    appleTouchIcon: "assets/apple-touch-icon.png",
+    nomAffiche: "EDC"                // nom court sous l'icône une fois installée
+};
+
+
 /* ---------- 2. CHARGEMENT DES COMPOSANTS ----------
    Va chercher un fichier HTML (ex. components/header.html) et l'insère
    dans l'élément de la page qui porte l'identifiant donné.
@@ -69,7 +80,9 @@ function marquerLienActif() {
     const pageCourante = (window.location.pathname.split("/").pop() || "index")
         .replace(".html", "");
 
-    document.querySelectorAll(".nav-links a").forEach(function (lien) {
+    // Même logique pour le menu du haut ET la barre du bas (ils partagent
+    // le même système de pastille/couleur "active", voir style.css).
+    document.querySelectorAll(".nav-links a, .bottom-nav a").forEach(function (lien) {
         const cible = lien.getAttribute("href").replace(".html", "");
         if (cible === pageCourante) {
             lien.classList.add("active");
@@ -311,6 +324,58 @@ function initialiserFormulaireParticulier() {
 }
 
 
+/* ---------- 8bis. BARRE DE NAVIGATION DU BAS (style application) ----------
+   Contrairement au header/footer, aucune page ne contient de conteneur pour
+   elle : on la charge et on l'ajoute nous-mêmes en fin de <body>. Cachée sur
+   ordinateur, visible seulement sur téléphone (voir style.css, section 10). */
+async function chargerBarreDuBas() {
+    try {
+        const reponse = await fetch(CONFIG.componentsPath + "bottom-nav.html");
+        if (!reponse.ok) throw new Error("HTTP " + reponse.status);
+        const conteneur = document.createElement("div");
+        conteneur.innerHTML = await reponse.text();
+        document.body.appendChild(conteneur.firstElementChild);
+    } catch (erreur) {
+        console.error("Impossible de charger bottom-nav.html :", erreur);
+    }
+}
+
+
+/* ---------- 8ter. APPLICATION INSTALLABLE (PWA) ----------
+   Ajoute les balises nécessaires pour que le site puisse être installé
+   comme une application (icône sur l'écran d'accueil, plein écran, sans
+   barre d'adresse). Rien ne change pour un visiteur qui reste dans son
+   navigateur : ces balises ne font qu'activer la fonctionnalité. */
+function ajouterBalisesPwa() {
+    const balises = [
+        { tag: "link", rel: "manifest", href: CONFIG_PWA.manifestPath },
+        { tag: "link", rel: "apple-touch-icon", href: CONFIG_PWA.appleTouchIcon },
+        { tag: "meta", name: "theme-color", content: CONFIG_PWA.themeColor },
+        { tag: "meta", name: "apple-mobile-web-app-capable", content: "yes" },
+        { tag: "meta", name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+        { tag: "meta", name: "apple-mobile-web-app-title", content: CONFIG_PWA.nomAffiche }
+    ];
+
+    balises.forEach(function (info) {
+        const element = document.createElement(info.tag);
+        if (info.rel) element.rel = info.rel;
+        if (info.href) element.href = info.href;
+        if (info.name) element.name = info.name;
+        if (info.content) element.content = info.content;
+        document.head.appendChild(element);
+    });
+}
+
+// Le service worker est ce qui autorise techniquement l'installation
+// (condition exigée par Android/Chrome) et permet l'ouverture hors-ligne.
+function enregistrerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return; // navigateur trop ancien : on ignore
+    navigator.serviceWorker.register(CONFIG_PWA.serviceWorkerPath).catch(function (erreur) {
+        console.error("Service worker non enregistré :", erreur);
+    });
+}
+
+
 /* ---------- 9. FAVICON ----------
    Ajoute l'icône de l'onglet à TOUTES les pages sans toucher à leur HTML.
    Si une page déclare déjà son icône dans <head>, on ne fait rien. */
@@ -329,7 +394,8 @@ function ajouterFavicon() {
    Ordre important : on charge d'abord header et footer, PUIS on active
    ce qui dépend d'eux (lien actif, menu mobile, année). */
 async function demarrer() {
-    ajouterFavicon(); // immédiat : ne dépend pas du chargement des composants
+    ajouterFavicon();   // immédiat : ne dépend pas du chargement des composants
+    ajouterBalisesPwa(); // idem
 
     await Promise.all([
         chargerComposant(
@@ -341,7 +407,8 @@ async function demarrer() {
             "site-footer",
             "footer.html",
             '<div class="footer-bottom"><p>© Francis Eboah — Tous droits réservés.</p></div>'
-        )
+        ),
+        chargerBarreDuBas()
     ]);
 
     marquerLienActif();
@@ -351,6 +418,7 @@ async function demarrer() {
     initialiserFormulaireService();
     initialiserFormulaireEnseignants();
     initialiserFormulaireParticulier();
+    enregistrerServiceWorker();
 }
 
 demarrer();
