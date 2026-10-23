@@ -234,13 +234,13 @@ function lienWave(montant) {
     return "https://pay.wave.com/m/" + CONFIG.waveMarchand + "/c/ci/?amount=" + montant;
 }
 
-// --- Session 1 : Enseignants contractuels (cases à cocher, tarif fixe) ---
-function initialiserFormulaireEnseignants() {
-    const formulaire = document.getElementById("form-enseignants");
+// --- Session 1 : Digital & Design (cases à cocher, tarif fixe) ---
+function initialiserFormulaireDigital() {
+    const formulaire = document.getElementById("form-digital");
     if (!formulaire) return; // autres pages : pas de formulaire
 
     const montant = formulaire.dataset.montant; // "2020", lu depuis le HTML
-    const erreurModules = document.getElementById("ens-erreur-modules");
+    const erreurModules = document.getElementById("dig-erreur-modules");
 
     formulaire.addEventListener("submit", function (evenement) {
         evenement.preventDefault();
@@ -265,7 +265,7 @@ function initialiserFormulaireEnseignants() {
         // Message rédigé en phrases (4 paragraphes), plutôt qu'en liste à puces.
         const paragraphes = [
             "Bonjour Francis,",
-            "Je souhaite m'inscrire à la formation Bureautique pour enseignants. " +
+            "Je souhaite m'inscrire à la formation Digital & Design. " +
                 "Je m'appelle " + nom + " et vous pouvez me joindre " +
                 "sur WhatsApp au " + whatsapp + ".",
             "J'ai choisi les modules suivants : " + modules + ". Le montant à " +
@@ -416,7 +416,7 @@ async function demarrer() {
     initialiserEnteteFixe();
     mettreAJourAnnee();
     initialiserFormulaireService();
-    initialiserFormulaireEnseignants();
+    initialiserFormulaireDigital();
     initialiserFormulaireParticulier();
     enregistrerServiceWorker();
 }
