@@ -1,0 +1,30 @@
+<!--
+  components/bottom-nav.html — BARRE DE NAVIGATION DU BAS (téléphone uniquement)
+  Chargée automatiquement par js/main.js, insérée en fin de <body>.
+  Visible seulement sous 700px de large (voir style.css, section 10).
+  Pour ajouter / renommer une entrée : modifier UNIQUEMENT ce fichier
+  (et la liste ICONES_BARRE_BASSE dans main.js si tu ajoutes une icône).
+-->
+<nav class="bottom-nav" aria-label="Navigation rapide">
+
+    <a href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        <span>Accueil</span>
+    </a>
+
+    <a href="formations.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5 12 4l10 4.5-10 4.5L2 8.5Z"/><path d="M6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M21 8.5V15"/></svg>
+        <span>Formations</span>
+    </a>
+
+    <a href="services.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.5a3.5 3.5 0 0 0-4.5 4.5L3 15l3 3 7-7a3.5 3.5 0 0 0 4.5-4.5l-2.3 2.3-2-2L14.5 3.5Z"/></svg>
+        <span>Services</span>
+    </a>
+
+    <a href="about.html" class="bottom-nav-edc">
+        <img src="assets/icon-192.png" alt="">
+        <span>EDC</span>
+    </a>
+
+</nav>
