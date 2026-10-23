@@ -7,6 +7,15 @@
     <title>Formations | Francis Eboah</title>
     <meta name="description" content="Formations en bureautique, développement web et mobile proposées par Francis Eboah : inscription en ligne pour enseignants et particuliers.">
 
+    <!-- Aperçu de partage (WhatsApp, Facebook...) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Formations | Francis Eboah">
+    <meta property="og:description" content="Formations en bureautique, développement web et mobile proposées par Francis Eboah : inscription en ligne pour enseignants et particuliers.">
+    <meta property="og:image" content="https://franciseboah01.github.io/assets/og-image.png">
+    <meta property="og:url" content="https://franciseboah01.github.io/formations.html">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
 </head>
@@ -69,13 +78,15 @@
 
                 <div class="form-group">
                     <label for="ens-nom">Votre nom</label>
-                    <input type="text" id="ens-nom" name="nom" required autocomplete="name">
+                    <input type="text" id="ens-nom" name="nom" required autocomplete="name" minlength="2">
                 </div>
 
                 <div class="form-group">
                     <label for="ens-whatsapp">Contact WhatsApp</label>
                     <input type="tel" id="ens-whatsapp" name="whatsapp" required
-                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel">
+                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel"
+                           inputmode="tel" pattern="[0-9 ]{8,15}"
+                           title="Uniquement des chiffres (et espaces), ex. 07 00 00 00 00">
                 </div>
 
                 <!-- Cases à cocher : au moins une doit être cochée.
@@ -154,13 +165,15 @@
 
                 <div class="form-group">
                     <label for="part-nom">Votre nom</label>
-                    <input type="text" id="part-nom" name="nom" required autocomplete="name">
+                    <input type="text" id="part-nom" name="nom" required autocomplete="name" minlength="2">
                 </div>
 
                 <div class="form-group">
                     <label for="part-whatsapp">Contact WhatsApp</label>
                     <input type="tel" id="part-whatsapp" name="whatsapp" required
-                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel">
+                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel"
+                           inputmode="tel" pattern="[0-9 ]{8,15}"
+                           title="Uniquement des chiffres (et espaces), ex. 07 00 00 00 00">
                 </div>
 
                 <!-- Boutons radio : un seul choix possible, le navigateur

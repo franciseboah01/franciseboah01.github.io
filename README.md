@@ -23,7 +23,9 @@ franciseboah01.github.io/
     ├── icon-192.png           → icône app (192×192)
     ├── icon-512.png           → icône app (512×512)
     ├── icon-maskable-512.png  → icône app, fond plein pour découpe Android
-    └── apple-touch-icon.png   → icône app pour iPhone (180×180)
+    ├── apple-touch-icon.png   → icône app pour iPhone (180×180)
+    └── og-image.png           → aperçu affiché quand le lien est partagé
+                                  (WhatsApp, Facebook...), 1200×630
 ```
 
 ## Application installable (PWA)
@@ -45,6 +47,17 @@ Tout est injecté en JavaScript par `js/main.js` (fonctions `ajouterBalisesPwa` 
   `sw.js` (sinon les visiteurs ayant déjà installé l'app peuvent voir une ancienne
   version pendant un moment, le temps que le nouveau service worker prenne le relais).
 - **Barre du bas** (Accueil / Formations / Services / EDC) : `components/bottom-nav.html`.
+
+## Aperçu de partage (WhatsApp, Facebook...)
+
+Chaque page a ses propres balises Open Graph (titre, description, image)
+dans son `<head>`, basées sur son `<title>` et sa balise `description` —
+rien à maintenir séparément, sauf si tu changes l'image : `assets/og-image.png`.
+
+- **Changer l'image d'aperçu** : remplacer `assets/og-image.png` (1200×630 px).
+- **Changer le texte d'une page** : modifier son `<title>` et son
+  `<meta name="description">` — les balises `og:title` / `og:description`
+  à côté doivent être mises à jour manuellement pour rester identiques.
 
 ## Tester en local
 
@@ -74,3 +87,6 @@ puis ouvrir http://localhost:8000 (ou utiliser l'extension « Live Server » de 
   visiteur doit passer par le formulaire WhatsApp pour que Francis sache qui
   s'inscrit avant tout paiement. Le lien Wave n'apparaît que dans le message
   WhatsApp envoyé (construit par `js/main.js`).
+- **Champs du formulaire protégés** : le numéro WhatsApp n'accepte que des
+  chiffres et espaces (8 à 15 caractères), le nom demande au moins 2
+  caractères — évite les saisies accidentelles du type « 0743contact.html ».
