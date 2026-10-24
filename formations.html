@@ -100,45 +100,167 @@
                 </div>
 
                 <!-- Cases à cocher : au moins une doit être cochée.
-                     main.js vérifie cette règle avant d'ouvrir WhatsApp. -->
+                     main.js vérifie cette règle avant d'ouvrir WhatsApp.
+                     Chaque bloc .formation-item = titre + case alignés sur
+                     une ligne (.formation-item-header), puis le programme
+                     détaillé en dessous (.formation-item-details). Pour
+                     ajouter une formation : copier un bloc .formation-item. -->
                 <div class="form-group">
                     <label>Formation(s) souhaitée(s)</label>
 
-                    <div class="form-checkboxes">
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Bureautique début">
-                            Bureautique début
-                        </label>
+                    <div class="formations-list">
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Bureautique intermédiaire">
-                            Bureautique intermédiaire
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Bureautique débutant">
+                                <span class="formation-item-title">Bureautique débutant</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> apprendre les bases de
+                                    l'informatique et de la bureautique.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Initiation à l'ordinateur, au clavier et à la souris</li>
+                                    <li>Gestion des fichiers et dossiers</li>
+                                    <li>Word : saisie et mise en forme de documents</li>
+                                    <li>Excel : tableaux simples, sommes et calculs de base</li>
+                                    <li>PowerPoint : création de présentations simples</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Bureautique expert">
-                            Bureautique expert
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Bureautique intermédiaire">
+                                <span class="formation-item-title">Bureautique intermédiaire</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> maîtriser les outils
+                                    bureautiques dans un contexte professionnel.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Word : tableaux, pagination, sommaire et documents longs</li>
+                                    <li>Excel : fonctions SI, SOMME.SI, NB.SI et graphiques</li>
+                                    <li>PowerPoint : animations et transitions</li>
+                                    <li>Gestion et conversion des fichiers PDF</li>
+                                    <li>Exercices pratiques professionnels</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Création d'applications web et mobile">
-                            Création d'applications web et mobile
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Bureautique expert">
+                                <span class="formation-item-title">Bureautique expert</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> créer des documents avancés
+                                    et automatiser les tâches bureautiques.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Word : modèles, publipostage et documents complexes</li>
+                                    <li>Excel : fonctions avancées et recherches</li>
+                                    <li>Tableaux croisés dynamiques et tableaux de bord</li>
+                                    <li>Automatisation des calculs et des tâches</li>
+                                    <li>Projet final de gestion avec Excel</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Marketing digital">
-                            Marketing digital
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Création d'applications web et mobiles">
+                                <span class="formation-item-title">Création d'applications web et mobiles</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> apprendre à concevoir et
+                                    développer des applications.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>HTML, CSS et JavaScript</li>
+                                    <li>Conception d'interfaces UI/UX</li>
+                                    <li>Bases de données et SQL</li>
+                                    <li>PHP et Laravel</li>
+                                    <li>Flutter et Dart</li>
+                                    <li>API REST, tests, sécurité et déploiement</li>
+                                    <li>Réalisation d'un projet pratique</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Intelligence artificielle">
-                            Intelligence artificielle
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Marketing digital">
+                                <span class="formation-item-title">Marketing digital</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> promouvoir une activité et
+                                    développer sa visibilité en ligne.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Stratégie de communication digitale</li>
+                                    <li>Création et optimisation de pages professionnelles</li>
+                                    <li>Création de contenus pour les réseaux sociaux</li>
+                                    <li>Calendrier éditorial et community management</li>
+                                    <li>Publicité en ligne et analyse des résultats</li>
+                                    <li>Réalisation d'une campagne de communication</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="formation" value="Design graphique Canva">
-                            Design graphique Canva
-                        </label>
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Intelligence artificielle">
+                                <span class="formation-item-title">Intelligence artificielle</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> utiliser l'IA pour améliorer
+                                    sa productivité et ses compétences.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Découverte des outils d'intelligence artificielle</li>
+                                    <li>Rédaction de prompts efficaces</li>
+                                    <li>Utilisation de l'IA pour Word, Excel et PowerPoint</li>
+                                    <li>Création de textes, images et présentations</li>
+                                    <li>Assistance à la programmation et à la recherche</li>
+                                    <li>Vérification des résultats et protection des données</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formation-item">
+                            <label class="formation-item-header">
+                                <input type="checkbox" name="formation" value="Design graphique avec Canva">
+                                <span class="formation-item-title">Design graphique avec Canva</span>
+                            </label>
+                            <div class="formation-item-details">
+                                <p class="formation-item-objectif">
+                                    <strong>Objectif :</strong> concevoir des visuels professionnels.
+                                </p>
+                                <p class="formation-item-programme-titre">Programme :</p>
+                                <ul class="formation-item-programme">
+                                    <li>Prise en main de Canva</li>
+                                    <li>Couleurs, typographie et composition graphique</li>
+                                    <li>Création d'affiches et de flyers</li>
+                                    <li>Création de cartes de visite</li>
+                                    <li>Visuels pour Facebook et autres réseaux sociaux</li>
+                                    <li>Projet final : création d'une mini-identité visuelle</li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Message d'erreur affiché par main.js si aucune case n'est cochée -->
