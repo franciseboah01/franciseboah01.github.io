@@ -245,6 +245,16 @@ function initialiserFormulaireFormations() {
     const montantFormation = Number(formulaire.dataset.montantFormation);     // 10100
     const erreurFormations = document.getElementById("form-erreur-formations");
 
+    // Met en évidence (bordure bleue) la carte d'une formation quand sa
+    // case est cochée. Fait en JS plutôt qu'en CSS pur (:has) pour rester
+    // compatible avec les anciens navigateurs/téléphones.
+    formulaire.querySelectorAll('input[name="formation"]').forEach(function (case_) {
+        case_.addEventListener("change", function () {
+            const carte = case_.closest(".formation-item");
+            if (carte) carte.classList.toggle("est-cochee", case_.checked);
+        });
+    });
+
     formulaire.addEventListener("submit", function (evenement) {
         evenement.preventDefault();
 
