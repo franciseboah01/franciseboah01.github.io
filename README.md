@@ -7,7 +7,7 @@ Site statique publié avec GitHub Pages : https://franciseboah01.github.io
 ```
 franciseboah01.github.io/
 ├── index.html · about.html · skills.html · services.html · contact.html
-├── formations.html        → inscription (Digital & Design + particuliers) avec paiement Wave
+├── formations.html        → inscription (une ou plusieurs formations) avec paiement Wave
 ├── 404.html               → page affichée par GitHub Pages pour une adresse inconnue
 ├── manifest.json          → identité de l'app installable (nom, icônes, couleurs)
 ├── sw.js                  → service worker (installation + hors-ligne)
@@ -79,8 +79,11 @@ puis ouvrir http://localhost:8000 (ou utiliser l'extension « Live Server » de 
   `https://wa.me/...` dans `index.html` et `contact.html`.
 - **Changer un tarif de formation** : nouveau tarif × 1,01 (frais de transaction),
   puis mettre à jour ce montant à 2 endroits dans `formations.html` (texte affiché
-  et attribut `data-montant...` du formulaire) ; le lien Wave est reconstruit
-  automatiquement par `js/main.js` à partir de ce montant.
+  et attribut `data-montant-inscription` / `data-montant-formation` du formulaire) ;
+  `js/main.js` calcule lui-même le total (inscription + formation × nombre de
+  cases cochées) et construit le lien Wave correspondant.
+- **Ajouter / retirer une formation** : une ligne `<label class="form-checkbox">`
+  dans `formations.html` — toutes à 10 100 FCFA, aucune autre modification requise.
 - **Changer le compte Wave** : une seule ligne à modifier, `js/main.js`
   (`CONFIG.waveMarchand`).
 - **Pas de bouton de paiement direct sur formations.html** : volontaire, le

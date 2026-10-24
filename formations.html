@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Formations | Francis Eboah</title>
-    <meta name="description" content="Formations en digital & design, bureautique, développement web et mobile proposées par Francis Eboah (EDC) : inscription en ligne.">
+    <meta name="description" content="Formations en bureautique, création d'applications web et mobile, marketing digital, intelligence artificielle et design graphique Canva, proposées par Francis Eboah (EDC) : inscription en ligne.">
 
     <!-- Aperçu de partage (WhatsApp, Facebook...) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Formations | Francis Eboah">
-    <meta property="og:description" content="Formations en digital & design, bureautique, développement web et mobile proposées par Francis Eboah (EDC) : inscription en ligne.">
+    <meta property="og:description" content="Formations en bureautique, création d'applications web et mobile, marketing digital, intelligence artificielle et design graphique Canva, proposées par Francis Eboah (EDC) : inscription en ligne.">
     <meta property="og:image" content="https://franciseboah01.github.io/assets/og-image.png">
     <meta property="og:url" content="https://franciseboah01.github.io/formations.html">
     <meta property="og:locale" content="fr_FR">
@@ -34,56 +34,66 @@
 
             <h1>Inscrivez-vous à une formation</h1>
 
-            <p>
-                Deux parcours disponibles : la formation Digital &amp; Design,
-                et des formations individuelles ouvertes à tous.
-                Remplissez le formulaire, puis réglez votre inscription par Wave.
-            </p>
-
         </section>
 
-        <!-- ================= SESSION 1 : DIGITAL & DESIGN =================
-             Les 3 modules sont des CASES À COCHER (checkbox) : la personne peut
-             en choisir un, deux ou les trois. Le tarif reste fixe (2 020 FCFA),
-             quel que soit le nombre de modules cochés : ce n'est pas un prix
-             "par module", mais le tarif d'accès à la session.
+        <!-- ================= FORMULAIRE D'INSCRIPTION =================
+             Les formations sont des CASES À COCHER (checkbox) : on peut en
+             choisir une ou plusieurs. Le prix dépend du nombre coché :
 
-             D'OÙ VIENT 2 020 FCFA ?
-             Tarif de base : 2 000 FCFA + 1 % de frais de transaction (20 FCFA)
-             = 2 020 FCFA. Si le tarif de base change, recalculer :
-             nouveau tarif × 1,01, et mettre à jour CE MONTANT à 2 endroits :
-               1) le texte affiché ci-dessous ("2 020 FCFA")
-               2) l'attribut data-montant du formulaire (utilisé par main.js,
-                  qui construit lui-même le lien Wave correspondant)
+               - Inscription (une seule fois, quel que soit le nombre de
+                 formations) : 5 050 FCFA (5 000 + 1 % de frais de transaction)
+               - Chaque formation cochée : 10 100 FCFA (10 000 + 1 %)
+               - Total envoyé dans le message WhatsApp = 5 050 + (nombre de
+                 formations cochées × 10 100)
+
+             Si ces tarifs de base changent, recalculer : nouveau tarif × 1,01,
+             et mettre à jour CE MONTANT à 2 endroits :
+               1) le texte affiché ci-dessous ("5 050 FCFA" / "10 100 FCFA")
+               2) les attributs data-montant-inscription / data-montant-formation
+                  du formulaire (utilisés par main.js pour calculer le total et
+                  construire le lien Wave correspondant)
 
              PAS DE BOUTON DE PAIEMENT DIRECT SUR LA PAGE : volontaire. Le
              visiteur doit passer par le formulaire WhatsApp ci-dessous, pour
              que Francis sache qui s'inscrit avant tout paiement. Le lien
-             Wave n'apparaît que dans le message WhatsApp envoyé. -->
+             Wave (montant total) n'apparaît que dans le message WhatsApp envoyé. -->
         <section class="content-card">
 
-            <h2>Session 1 — Digital &amp; Design</h2>
-
             <p>
-                Création visuelle et présence numérique. Cochez un ou
-                plusieurs modules, puis inscrivez-vous.
+                Formations individuelles en bureautique, développement
+                d'applications web et mobile, ou création de site e-commerce.
+                Choisissez une ou plusieurs formations, puis inscrivez-vous.
             </p>
 
             <div class="formation-prix">
-                <strong>2 020 FCFA</strong>
-                <span>tarif unique, frais de transaction inclus (1 %)</span>
+                <strong>5 050 FCFA</strong>
+                <span>frais d'inscription (1 % inclus), une seule fois</span>
             </div>
 
-            <form id="form-digital" data-montant="2020">
+            <div class="formation-prix">
+                <strong>10 100 FCFA</strong>
+                <span>par formation cochée (1 % inclus)</span>
+            </div>
+
+            <form id="form-formations" data-montant-inscription="5050" data-montant-formation="10100">
 
                 <div class="form-group">
-                    <label for="dig-nom">Votre nom</label>
-                    <input type="text" id="dig-nom" name="nom" required autocomplete="name" minlength="2">
+                    <label for="form-mode">En ligne ou en présentiel ?</label>
+                    <select id="form-mode" name="mode" required>
+                        <option value="">— Choisir —</option>
+                        <option>En ligne</option>
+                        <option>En présentiel</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="dig-whatsapp">Contact WhatsApp</label>
-                    <input type="tel" id="dig-whatsapp" name="whatsapp" required
+                    <label for="form-nom">Votre nom</label>
+                    <input type="text" id="form-nom" name="nom" required autocomplete="name" minlength="2">
+                </div>
+
+                <div class="form-group">
+                    <label for="form-whatsapp">Contact WhatsApp</label>
+                    <input type="tel" id="form-whatsapp" name="whatsapp" required
                            placeholder="Ex. 07 00 00 00 00" autocomplete="tel"
                            inputmode="tel" pattern="[0-9 ]{8,15}"
                            title="Uniquement des chiffres (et espaces), ex. 07 00 00 00 00">
@@ -92,121 +102,54 @@
                 <!-- Cases à cocher : au moins une doit être cochée.
                      main.js vérifie cette règle avant d'ouvrir WhatsApp. -->
                 <div class="form-group">
-                    <label>Modules souhaités</label>
+                    <label>Formation(s) souhaitée(s)</label>
 
                     <div class="form-checkboxes">
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="Canva">
-                            Canva
+                            <input type="checkbox" name="formation" value="Bureautique début">
+                            Bureautique début
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="Réseaux sociaux">
-                            Réseaux sociaux
+                            <input type="checkbox" name="formation" value="Bureautique intermédiaire">
+                            Bureautique intermédiaire
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="checkbox" name="module" value="Logo et identité visuelle">
-                            Logo &amp; identité visuelle
-                        </label>
-                    </div>
-
-                    <!-- Message d'erreur affiché par main.js si aucune case n'est cochée -->
-                    <p class="form-erreur" id="dig-erreur-modules" hidden>
-                        Choisissez au moins un module.
-                    </p>
-                </div>
-
-                <button type="submit" class="btn btn-whatsapp">
-                    S'inscrire sur WhatsApp
-                </button>
-
-                <p class="form-note">
-                    WhatsApp s'ouvrira avec vos informations et le lien de paiement Wave.
-                </p>
-
-            </form>
-
-        </section>
-
-        <!-- ================= SESSION 2 : PARTICULIERS =================
-             Les 3 formations sont des BOUTONS RADIO : une seule formation
-             peut être choisie à la fois (contrairement à la session 1).
-
-             DEUX MONTANTS SÉPARÉS, TOUJOURS LES MÊMES quelle que soit la
-             formation choisie :
-               - Inscription : 5 050 FCFA (5 000 + 1 %)
-               - Formation   : 10 100 FCFA (10 000 + 1 %)
-             Les deux sont dus. Comme Wave n'accepte qu'un montant par lien,
-             main.js construit DEUX liens de paiement séparés dans le message
-             WhatsApp envoyé (pas de bouton de paiement direct sur la page :
-             voir la note de la session 1 ci-dessus). -->
-        <section class="content-card">
-
-            <h2>Session 2 — Particuliers</h2>
-
-            <p>
-                Formations individuelles en bureautique, développement
-                d'applications web et mobile, ou création de site e-commerce.
-                Choisissez une formation, puis inscrivez-vous.
-            </p>
-
-            <div class="formation-prix">
-                <strong>5 050 FCFA</strong>
-                <span>frais d'inscription (1 % inclus)</span>
-            </div>
-
-            <div class="formation-prix">
-                <strong>10 100 FCFA</strong>
-                <span>frais de formation (1 % inclus) — à régler en ligne</span>
-            </div>
-
-            <form id="form-particulier" data-montant-inscription="5050" data-montant-formation="10100">
-
-                <div class="form-group">
-                    <label for="part-nom">Votre nom</label>
-                    <input type="text" id="part-nom" name="nom" required autocomplete="name" minlength="2">
-                </div>
-
-                <div class="form-group">
-                    <label for="part-whatsapp">Contact WhatsApp</label>
-                    <input type="tel" id="part-whatsapp" name="whatsapp" required
-                           placeholder="Ex. 07 00 00 00 00" autocomplete="tel"
-                           inputmode="tel" pattern="[0-9 ]{8,15}"
-                           title="Uniquement des chiffres (et espaces), ex. 07 00 00 00 00">
-                </div>
-
-                <!-- Boutons radio : un seul choix possible, le navigateur
-                     impose la sélection grâce à "required" sur chaque bouton. -->
-                <div class="form-group">
-                    <label>Formation souhaitée</label>
-
-                    <div class="form-checkboxes">
-                        <label class="form-checkbox">
-                            <input type="radio" name="formation" value="Bureautique" required>
-                            Bureautique (Word, Excel, PowerPoint)
+                            <input type="checkbox" name="formation" value="Bureautique expert">
+                            Bureautique expert
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="radio" name="formation" value="Création d'applications web et mobile" required>
+                            <input type="checkbox" name="formation" value="Création d'applications web et mobile">
                             Création d'applications web et mobile
                         </label>
 
                         <label class="form-checkbox">
-                            <input type="radio" name="formation" value="Création de site e-commerce et boutique en ligne" required>
-                            Création de site e-commerce et boutique en ligne
+                            <input type="checkbox" name="formation" value="Marketing digital">
+                            Marketing digital
+                        </label>
+
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="formation" value="Intelligence artificielle">
+                            Intelligence artificielle
+                        </label>
+
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="formation" value="Design graphique Canva">
+                            Design graphique Canva
                         </label>
                     </div>
+
+                    <!-- Message d'erreur affiché par main.js si aucune case n'est cochée -->
+                    <p class="form-erreur" id="form-erreur-formations" hidden>
+                        Choisissez au moins une formation.
+                    </p>
                 </div>
 
                 <button type="submit" class="btn btn-whatsapp">
-                    S'inscrire sur WhatsApp
+                    Je m'inscris
                 </button>
-
-                <p class="form-note">
-                    WhatsApp s'ouvrira avec vos informations et les deux liens de paiement Wave
-                    (inscription puis formation).
-                </p>
 
             </form>
 
