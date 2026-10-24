@@ -301,7 +301,7 @@ header.scrolled {
     box-shadow: var(--ombre-hero);
 }
 
-.hero h2 {
+.hero h1 {
     font-size: 2.5rem;
     color: var(--titre);
     margin-bottom: 10px;
@@ -1232,7 +1232,7 @@ footer {
         padding: 30px 18px;
     }
 
-    .hero h2 {
+    .hero h1 {
         font-size: 2rem;
     }
 
