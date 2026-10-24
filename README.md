@@ -11,6 +11,9 @@ franciseboah01.github.io/
 ├── 404.html               → page affichée par GitHub Pages pour une adresse inconnue
 ├── manifest.json          → identité de l'app installable (nom, icônes, couleurs)
 ├── sw.js                  → service worker (installation + hors-ligne)
+├── robots.txt             → autorise l'indexation, pointe vers sitemap.xml
+├── sitemap.xml            → liste des pages pour les moteurs de recherche
+                              (mettre à jour "lastmod" si une page change beaucoup)
 ├── css/style.css          → tout le design (variables de couleur en haut)
 ├── js/main.js             → header/footer, menu mobile, formulaire WhatsApp, PWA
 ├── components/
@@ -47,6 +50,9 @@ Tout est injecté en JavaScript par `js/main.js` (fonctions `ajouterBalisesPwa` 
   `sw.js` (sinon les visiteurs ayant déjà installé l'app peuvent voir une ancienne
   version pendant un moment, le temps que le nouveau service worker prenne le relais).
 - **Barre du bas** (Accueil / Formations / Services / EDC) : `components/bottom-nav.html`.
+- **Bouton WhatsApp flottant** (visible sur toutes les pages) : ajouté par
+  `js/main.js` (fonction `ajouterBoutonWhatsappFlottant`) — même numéro que
+  `CONFIG.whatsappNumber`, message pré-rempli modifiable dans cette fonction.
 
 ## Aperçu de partage (WhatsApp, Facebook...)
 
