@@ -210,6 +210,38 @@ header.scrolled {
     display: none;
 }
 
+/* Bouton WhatsApp flottant, ajouté par main.js sur toutes les pages.
+   z-index 998 : sous le header/la barre du bas (1000) mais au-dessus
+   du reste du contenu. Remonte au-dessus de la barre du bas sur mobile
+   (voir media query, section 10). */
+.whatsapp-flottant {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
+    background: var(--whatsapp);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--ombre-survol);
+    z-index: 998;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.whatsapp-flottant:hover,
+.whatsapp-flottant:focus-visible {
+    background: var(--whatsapp-fonce);
+    transform: scale(1.06);
+}
+
+.whatsapp-flottant svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}
+
 
 /* ==========================================================================
    4. BOUTONS
@@ -1351,6 +1383,19 @@ footer {
         border-top: 1px solid #e5e7eb;
         box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
         padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    }
+
+    /* Le bouton flottant remonte au-dessus de la barre du bas (60px + marge) */
+    .whatsapp-flottant {
+        right: 16px;
+        bottom: calc(76px + env(safe-area-inset-bottom));
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-flottant svg {
+        width: 24px;
+        height: 24px;
     }
 
     .bottom-nav a {
