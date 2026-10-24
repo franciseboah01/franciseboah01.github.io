@@ -369,11 +369,32 @@ function ajouterFavicon() {
    Ajouté en bas à droite de CHAQUE page (sauf si la page a déjà un bouton
    WhatsApp dans sa zone visible immédiate, ce n'est pas vérifié ici : on
    l'affiche partout, c'est l'usage standard). Sur mobile, il remonte
-   au-dessus de la barre de navigation du bas (voir style.css). */
+   au-dessus de la barre de navigation du bas (voir style.css).
+
+   Le message pré-rempli indique la page visitée (ex. "*Formations*"),
+   avec des astérisques : c'est la syntaxe WhatsApp pour le gras, pas du
+   Markdown. Pour ajouter une page, ajouter son entrée dans NOMS_PAGES. */
+const NOMS_PAGES = {
+    index: "Accueil",
+    about: "À propos",
+    skills: "Compétences",
+    services: "Services",
+    formations: "Formations",
+    contact: "Contact"
+};
+
 function ajouterBoutonWhatsappFlottant() {
+    const pageCourante = (window.location.pathname.split("/").pop() || "index")
+        .replace(".html", "") || "index";
+    const nomPage = NOMS_PAGES[pageCourante];
+
+    const texte = nomPage
+        ? "Bonjour Francis 👋, je viens de visiter la page *" + nomPage +
+          "* de votre site EDC et j'aimerais échanger."
+        : "Bonjour Francis 👋, je viens de visiter votre site EDC et j'aimerais échanger.";
+
     const lien = document.createElement("a");
-    lien.href = "https://wa.me/" + CONFIG.whatsappNumber +
-        "?text=" + encodeURIComponent("Bonjour Francis, je viens de visiter votre site EDC.");
+    lien.href = "https://wa.me/" + CONFIG.whatsappNumber + "?text=" + encodeURIComponent(texte);
     lien.className = "whatsapp-flottant";
     lien.target = "_blank";
     lien.rel = "noopener noreferrer";
