@@ -255,6 +255,22 @@ function initialiserFormulaireFormations() {
         });
     });
 
+    // Programme replié par défaut (moins de défilement) : le bouton
+    // "Voir le programme" ouvre/ferme les détails d'une formation, sans
+    // cocher la case (indépendant du formulaire).
+    formulaire.querySelectorAll(".formation-item-toggle").forEach(function (bouton) {
+        bouton.addEventListener("click", function () {
+            const carte = bouton.closest(".formation-item");
+            if (!carte) return;
+
+            const estOuverte = carte.classList.toggle("ouverte");
+            bouton.setAttribute("aria-expanded", estOuverte ? "true" : "false");
+
+            const texte = bouton.querySelector(".toggle-texte");
+            if (texte) texte.textContent = estOuverte ? "Masquer le programme" : "Voir le programme";
+        });
+    });
+
     formulaire.addEventListener("submit", function (evenement) {
         evenement.preventDefault();
 
