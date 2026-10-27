@@ -587,8 +587,13 @@ header.scrolled {
     margin-bottom: 10px;
 }
 
+.page-header p {
+    margin-bottom: 10px;
+}
+
 .page-header p:last-child {
     color: var(--texte-clair);
+    margin-bottom: 0;
 }
 
 /* Carte de contenu (page À propos, formulaire...) */
