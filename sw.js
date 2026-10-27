@@ -18,7 +18,7 @@
    les visiteurs ayant déjà installé l'app peuvent voir une version ancienne
    pendant un moment. */
 
-const CACHE_VERSION = "v10";
+const CACHE_VERSION = "v11";
 const CACHE_NAME = "edc-" + CACHE_VERSION;
 
 // Fichiers mis en cache dès l'installation (l'essentiel pour afficher le site)
